@@ -13,62 +13,66 @@ namespace LampMonster
         private class Category
         {
             public readonly string id;
-            public readonly int vocabalarySize;
+            public readonly int wordCount;
+            public readonly Quad categoryProb;
             public readonly Dictionary<string, int> bagOfWords;
 
-            public Category(string id, int vocabalarySize, Dictionary<string, int> bagOfWords)
+            public Category(string id, int vocabalarySize,
+                            Quad categoryProb, Dictionary<string, int> bagOfWords)
             {
                 this.id = id;
-                this.vocabalarySize = vocabalarySize;
+                this.wordCount = vocabalarySize;
+                this.categoryProb = categoryProb;
                 this.bagOfWords = bagOfWords;
             }
         }
 
 
-        List<Category> categories;
-        int prior;
+        private List<Category> categories;
+        private int prior;
 
-        public NaiveBayesClassifyer(Dictionary<string, List<string>> trainingSet,
+        public NaiveBayesClassifyer(List<CategoryData> categories,
                                      int prior)
         {
-            this.categories = CreateCategorys(trainingSet);
+            this.categories = CreateCategorys(categories);
             this.prior = prior;
         }
 
 
-        private static List<Category> CreateCategorys(Dictionary<string, List<string>> trainingSet)
+        private static List<Category> CreateCategorys(List<CategoryData> trainingData)
         {
             var categories = new List<Category>();
-            foreach (var item in trainingSet)
+            foreach (var item in trainingData)
             {
-                var bag = CreateMegaDoc(item.Value); 
-                categories.Add(new Category(item.Key, item.Value.Count, bag));
+                categories.Add(CreateCategory(item));
             }
 
             return categories;
         }
 
-        private static Dictionary<string, int> CreateMegaDoc(List<string> words)
+        private static Category CreateCategory (CategoryData categoryData)
         {
             var bag = new Dictionary<string, int>();
-            foreach (var word in words)
+            int wordCount = 0;
+            foreach (var document in categoryData.TrainingDocuments)
             {
-                if (!bag.ContainsKey(word))
-                    bag[word] = 1;
-                else
-                    bag[word]++;
+                foreach (var word in document)
+                {
+                    wordCount++;
+                    if (!bag.ContainsKey(word))
+                        bag[word] = 1;
+                    else
+                        bag[word]++;
+                }
             }
-
-
-
-            return bag;
+            return new Category(categoryData.ID, wordCount, categoryData.CategoryProb, bag); 
         }
 
 
         private Quad CalculateCategoryProbability(List<string> document, Category category) 
         {
             Quad product = 1;
-            Quad nom = category.vocabalarySize + category.bagOfWords.Count * prior;
+            Quad nom = category.wordCount + category.bagOfWords.Count * prior;
 
             foreach (var word in document)
             {
@@ -78,7 +82,7 @@ namespace LampMonster
                 product *= denom / nom;
             }
 
-            return product;
+            return product * category.categoryProb;
         }
 
         public string Classify(List<string> document)
