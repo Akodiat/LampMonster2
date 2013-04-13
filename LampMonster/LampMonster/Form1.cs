@@ -28,7 +28,7 @@ namespace LampMonster
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string root = "C:/Users/Lukas/Documents/GitHub/LampMonster/Documents/amazon-balanced-6cats";
+            string root = "../../../../Documents/amazon-balanced-6cats";
 
             var categories = new List<string>();
             categories.Add("books");
