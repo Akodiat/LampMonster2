@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using W3b.Sine;
+using Quadruple; 
 
 
 namespace LampMonster
@@ -14,9 +14,9 @@ namespace LampMonster
         {
             public readonly string id;
             public readonly int vocabalarySize;
-            public readonly Dictionary<string, double> bagOfWords;
+            public readonly Dictionary<string, int> bagOfWords;
 
-            public Category(string id, int vocabalarySize, Dictionary<string, double> bagOfWords)
+            public Category(string id, int vocabalarySize, Dictionary<string, int> bagOfWords)
             {
                 this.id = id;
                 this.vocabalarySize = vocabalarySize;
@@ -26,10 +26,10 @@ namespace LampMonster
 
 
         List<Category> categories;
-        double prior;
+        int prior;
 
         public NaiveBayesClassifyer(Dictionary<string, List<string>> trainingSet,
-                                     double prior)
+                                     int prior)
         {
             this.categories = CreateCategorys(trainingSet);
             this.prior = prior;
@@ -48,13 +48,13 @@ namespace LampMonster
             return categories;
         }
 
-        private static Dictionary<string, double> CreateMegaDoc(List<string> words)
+        private static Dictionary<string, int> CreateMegaDoc(List<string> words)
         {
-            var bag = new Dictionary<string, double>();
+            var bag = new Dictionary<string, int>();
             foreach (var word in words)
             {
                 if (!bag.ContainsKey(word))
-                    bag[word] = 1.0d;
+                    bag[word] = 1;
                 else
                     bag[word]++;
             }
@@ -65,17 +65,17 @@ namespace LampMonster
         }
 
 
-        private BigNum CalculateCategoryProbability(List<string> document, Category category) 
+        private Quad CalculateCategoryProbability(List<string> document, Category category) 
         {
-            BigNum product = 1;
-            BigNum nom = new BigNumDec(category.vocabalarySize + category.bagOfWords.Count * this.prior);
+            Quad product = 1;
+            Quad nom = category.vocabalarySize + category.bagOfWords.Count * prior;
 
             foreach (var word in document)
             {
-                double denom;
+                int denom;
                 category.bagOfWords.TryGetValue(word, out denom);
                 denom += prior;
-                product = new BigNumDec(denom) / nom;
+                product *= denom / nom;
             }
 
             return product;
@@ -83,12 +83,12 @@ namespace LampMonster
 
         public string Classify(List<string> document)
         {
-            BigNum max = 0.0d;
+            Quad max = 0.0d;
             Category selectedCategory = null;
             foreach (var category in this.categories)
             {
-                BigNum probability = CalculateCategoryProbability(document, category);
-                if (probability.CompareTo(max) < 0)
+                Quad probability = CalculateCategoryProbability(document, category);
+                if (probability > max)
                 {
                     max = probability;
                     selectedCategory = category;

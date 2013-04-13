@@ -18,7 +18,7 @@ namespace LampMonster
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             string root = "C:/Users/Lukas/Documents/GitHub/LampMonster/Documents/amazon-balanced-6cats";
 
@@ -30,8 +30,75 @@ namespace LampMonster
             categories.Add("health");
             categories.Add("software");
 
-            var pathFinder = new OrderedPathFinder(500, 400);
+            var pathFinder = new OrderedPathFinder(400, 400);
             var fileParser = new FileParser();
+
+            string mode = (string)comboBox1.SelectedItem;
+
+            if (mode == "Indomain")
+                Indomain(root, categories, pathFinder, fileParser);
+            else if (mode  == "Categorize")
+                OutOfDomain(root, categories, pathFinder, fileParser);
+            else
+                Crategorize(root, categories, pathFinder, fileParser);
+
+        }
+
+
+        private void Crategorize(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OutOfDomain(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        {
+            var map = new Dictionary<string, List<string>>();
+            foreach (var item in categories)
+            {
+                var posPath = root + "/" + item + "/pos";
+                var negPath = root + "/" + item + "/neg";
+
+                var pos = pathFinder.GetTrainingPaths(posPath);
+                var neg = pathFinder.GetTrainingPaths(negPath);
+
+                var categoryList = new List<string>();
+                categoryList.AddRange(GetMegaDocument(pos, fileParser));
+                categoryList.AddRange(GetMegaDocument(neg, fileParser));
+                map.Add(item, categoryList);
+            }
+
+
+            var classifyer = new NaiveBayesClassifyer(map, 1);
+
+
+            foreach (var item in categories)
+            {
+                var posPath = root + "/" + item + "/pos";
+                var negPath = root + "/" + item + "/neg";
+
+                var pos = pathFinder.GetProcessingPaths(posPath);
+                var neg = pathFinder.GetProcessingPaths(negPath);
+
+                var testSet  = new List<string>();
+                testSet.AddRange(pos);
+                testSet.AddRange(neg);
+
+                int correctCount = 0;
+                foreach (var file in testSet)
+                {
+                    var category = classifyer.Classify(fileParser.GetWordsInFile(file, (s) => true));
+                    if (category == item)
+                        correctCount++;
+                }
+
+                Console.WriteLine("Correct times on " + item + " is: " + correctCount);
+            }
+
+
+        }
+
+        private void Indomain(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        {
 
             foreach (var item in categories)
             {
@@ -45,7 +112,7 @@ namespace LampMonster
                 map.Add("pos", GetMegaDocument(pos, fileParser));
                 map.Add("neg", GetMegaDocument(neg, fileParser));
 
-                var classifyer = new NaiveBayesClassifyer(map, 1);
+                var classifyer = new NaiveBayesClassifyer(map, 2);
 
                 var pos2 = pathFinder.GetProcessingPaths(posPath);
                 var neg2 = pathFinder.GetProcessingPaths(negPath);
@@ -56,11 +123,9 @@ namespace LampMonster
                 {
                     var category = classifyer.Classify(fileParser.GetWordsInFile(document, (s) => true));
                     if (category == "pos")
-                    {
                         correctPosCount++;
-                    }
                 }
-                
+
                 Console.WriteLine("Correct pos for category " + item + " is: " + correctPosCount);
                 int correctNegCount = 0;
 
@@ -71,20 +136,18 @@ namespace LampMonster
                         correctNegCount++;
                 }
 
-                Console.WriteLine("Correct pos neg category " + item + " is: " + correctNegCount);
-                Console.WriteLine("Total correct for " + item + " is: " + (correctPosCount + correctNegCount));           
+                Console.WriteLine("Correct neg for category " + item + " is: " + correctNegCount);
+                Console.WriteLine("Total correct for " + item + " is: " + (correctPosCount + correctNegCount));
             }
-       }
+        }
 
         private List<string> GetMegaDocument(List<string> files, FileParser parser)
         {
-            double dummy;
             var words = new List<string>();
             foreach (var file in files)
-                words.AddRange(parser.GetWordsInFile(file, (s) => !double.TryParse(s, out dummy)));
+                words.AddRange(parser.GetWordsInFile(file, (s) => true));
 
             return words;
         }
-        
     }
 }
