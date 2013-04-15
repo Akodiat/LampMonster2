@@ -6,8 +6,14 @@ namespace LampMonster
 {
     class FileParser
     {
+        Dictionary<string, List<string>> cache = new Dictionary<string, List<string>>();
+
         public List<string> GetWordsInFile(string filePath, Predicate<string> wordFilter)
         {
+            if (cache.ContainsKey(filePath))
+                return cache[filePath];
+
+
             string[] words;
             using (TextReader reader = new StreamReader(filePath))
             {
@@ -23,6 +29,7 @@ namespace LampMonster
                     list.Add(word.ToLower());
             }
 
+            this.cache.Add(filePath, list);
             return list;
         }
     }

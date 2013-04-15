@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LampMonster
 {
@@ -37,43 +38,41 @@ namespace LampMonster
             categories.Add("health");
             categories.Add("software");
 
-            var pathFinder = new OrderedPathFinder(100, 100);
             var fileParser = new FileParser();
 
             string mode = (string)comboBox1.SelectedItem;
 
-            if (mode == "Indomain")
-                Indomain(root, categories, pathFinder, fileParser);
-            else if (mode  == "Categorize")
-                Crategorize(root, categories, pathFinder, fileParser);
-            else
-                OutOfDomain(root, categories, pathFinder, fileParser);
 
+            var watch = Stopwatch.StartNew();
+
+            var pathFinder = new OrderedPathFinder(600, 100);
+            Indomain(root, categories, pathFinder, fileParser);
+            Crategorize(root, categories, pathFinder, fileParser);
+            OutOfDomain(root, categories, pathFinder, fileParser);
+
+
+            watch.Stop();
+
+            Console.WriteLine("Running time was: " + watch.Elapsed.Seconds + " seconds.");
         }
 
 
-        private void Crategorize(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        private void Crategorize(string root, List<string> categories, OrderedPathFinder finder, FileParser fileParser)
         {
             var trainingMap = new Dictionary<string, List<string>>();
             var testMap = new Dictionary<string, List<string>>();
 
-            foreach (var item in categories)
+            foreach (var category in categories)
             {
-                var posPath = root + "/" + item + "/pos";
-                var negPath = root + "/" + item + "/neg";
-
-                var pos = pathFinder.GetTrainingPaths(posPath);
-                var neg = pathFinder.GetTrainingPaths(negPath);
-
                 var trainingList = new List<string>();
-                trainingList.AddRange(pos);
-                trainingList.AddRange(neg);
-                trainingMap.Add(item, trainingList);
+                trainingList.AddRange(GetTrainingPaths(root, category, "pos", finder));
+                trainingList.AddRange(GetTrainingPaths(root, category, "neg", finder));
+                trainingMap.Add(category, trainingList);
 
                 var testList = new List<string>();
-                testList.AddRange(pathFinder.GetProcessingPaths(posPath));
-                testList.AddRange(pathFinder.GetProcessingPaths(negPath));
-                testMap.Add(item, testList);
+                testList.AddRange(GetTestPaths(root, category, "pos", finder));
+                testList.AddRange(GetTestPaths(root, category, "neg", finder));
+                testMap.Add(category, testList);
             }
 
             var trainingData = GetCategoryData(trainingMap, fileParser);
@@ -81,27 +80,16 @@ namespace LampMonster
 
             foreach (var test in testMap)
             {
-                int correctCount = 0;
-                foreach (var file in test.Value)
-                {
-                    var category = classifyer.Classify(fileParser.GetWordsInFile(file, WordFilter));
-                    if (category == test.Key)
-                        correctCount++;
-                }
-
+                int correctCount = RunTests(classifyer, test.Value, test.Key, fileParser);
                 Console.WriteLine("Correct times on " + test.Key + " is: " + correctCount);
             }
         }
 
-        private void OutOfDomain(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        private void OutOfDomain(string root, List<string> categories, IPathFinder pathFinder, FileParser fileParser)
         {
             foreach (var category in categories)
             {
-                var posTrainingPaths = GetTrainingPaths(root, category, "pos", pathFinder);
-                var negTrainingPaths = GetTrainingPaths(root, category, "neg", pathFinder);
-                var trainingMap = new Dictionary<string, List<string>>();
-                trainingMap.Add("pos", posTrainingPaths);
-                trainingMap.Add("neg", negTrainingPaths);
+                var trainingMap = GetPosNegTrainingMap(root, category, pathFinder);
 
                 var trainingData = GetCategoryData(trainingMap, fileParser);
                 var classifyer = GetClassifyer(trainingData);
@@ -124,19 +112,14 @@ namespace LampMonster
             }
         }
 
-        private void Indomain(string root, List<string> categories, OrderedPathFinder pathFinder, FileParser fileParser)
+        private void Indomain(string root, List<string> categories, IPathFinder pathFinder, FileParser fileParser)
         {
             foreach (var category in categories)
             {
-                var posTrainingPaths = GetTrainingPaths(root, category, "pos", pathFinder);
-                var negTrainingPaths = GetTrainingPaths(root, category, "neg", pathFinder);
-
+                var trainingMap = GetPosNegTrainingMap(root, category, pathFinder);
+                
                 var posTests = GetTestPaths(root, category, "pos", pathFinder);
                 var negTests = GetTestPaths(root, category, "neg", pathFinder);
-
-                var trainingMap = new Dictionary<string, List<string>>();
-                trainingMap.Add("pos", posTrainingPaths);
-                trainingMap.Add("neg", negTrainingPaths);
 
                 var trainingData = GetCategoryData(trainingMap, fileParser);
                 var classifyer = GetClassifyer(trainingData);
@@ -183,6 +166,17 @@ namespace LampMonster
             return correctCount;
         }
 
+        private Dictionary<string, List<string>> GetPosNegTrainingMap(string root, string category, IPathFinder finder)
+        {
+            var posTrainingPaths = GetTrainingPaths(root, category, "pos", finder);
+            var negTrainingPaths = GetTrainingPaths(root, category, "neg", finder);
+            var trainingMap = new Dictionary<string, List<string>>();
+            trainingMap.Add("pos", posTrainingPaths);
+            trainingMap.Add("neg", negTrainingPaths);
+
+            return trainingMap;
+        }
+        
         private List<string> GetTestPaths(string root, string category, string posNeg, IPathFinder finder)
         {
             var path = root + "/" + category + "/" + posNeg;
@@ -195,11 +189,6 @@ namespace LampMonster
             return finder.GetTrainingPaths(path);
         }
 
-        private Classifyer GetClassifyer(List<CategoryData> trainingData)
-        {
-            return new NaiveBayesClassifyer(trainingData, 1);
-        }
-
         private List<List<string>> GetFilesAsWords(List<string> files, FileParser parser)
         {
             var words = new List<List<string>>();
@@ -208,5 +197,11 @@ namespace LampMonster
 
             return words;
         }
+
+        private Classifyer GetClassifyer(List<CategoryData> trainingData)
+        {
+            return new NaiveBayesClassifyer(trainingData, 1);
+        }
+
     }
 }
