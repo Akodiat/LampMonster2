@@ -79,7 +79,9 @@ namespace LampMonster
                 int denom;
                 category.bagOfWords.TryGetValue(word, out denom);
                 denom += prior;
-                product *= denom / nom;
+                
+                product.Multiply(denom);
+                product.Divide(nom);
             }
 
             return product * category.categoryProb;

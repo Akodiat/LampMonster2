@@ -26,9 +26,13 @@ namespace LampMonster
         }
 
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            string root = "../../../../Documents/amazon-balanced-6cats";
+
+            Main.Start();
+
+
+           /* string root = "../../../../Documents/amazon-balanced-6cats";
 
             var categories = new List<string>();
             categories.Add("books");
@@ -53,7 +57,7 @@ namespace LampMonster
 
             watch.Stop();
 
-            Console.WriteLine("Running time was: " + watch.Elapsed.Seconds + " seconds.");
+            Console.WriteLine("Running time was: " + watch.Elapsed.Seconds + " seconds.");*/
         }
 
 
@@ -202,6 +206,5 @@ namespace LampMonster
         {
             return new NaiveBayesClassifyer(trainingData, 1);
         }
-
     }
 }
