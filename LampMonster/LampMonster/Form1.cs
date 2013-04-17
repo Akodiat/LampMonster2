@@ -59,7 +59,7 @@ namespace LampMonster
 
             Console.WriteLine("Running time was: " + watch.Elapsed.Seconds + " seconds.");*/
         }
-
+        /*
 
         private void Crategorize(string root, List<string> categories, OrderedPathFinder finder, FileParser fileParser)
         {
@@ -206,5 +206,7 @@ namespace LampMonster
         {
             return new NaiveBayesClassifyer(trainingData, 1);
         }
+         * 
+         */
     }
 }

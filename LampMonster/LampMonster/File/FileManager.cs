@@ -33,15 +33,15 @@ namespace LampMonster
                                                  string[] negFiles, FileParser parser,
                                                  Predicate<string> wordFilter)
         {
-            var posDoc = new List<List<string>>();
-            var negDoc = new List<List<string>>();
+            var posDoc = new List<Document>();
+            var negDoc = new List<Document>();
 
             foreach (var file in posFiles)
-                posDoc.Add(parser.GetWordsInFile(file, wordFilter));
+                posDoc.Add(new Document(file, parser.GetWordsInFile(file, wordFilter)));
 
             foreach (var file in negFiles)
-                negDoc.Add(parser.GetWordsInFile(file, wordFilter));
-
+                negDoc.Add(new Document(file, parser.GetWordsInFile(file, wordFilter)));
+           
             return new ClassData(category, posDoc, negDoc);
         }
     }

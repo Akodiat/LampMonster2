@@ -8,6 +8,6 @@ namespace LampMonster
 {
     interface Classifyer
     {
-        string Classify(List<string> document);
+        string Classify(Document document);
     }
 }

@@ -69,7 +69,7 @@ namespace LampMonster
         }
 
 
-        private Quad CalculateCategoryProbability(List<string> document, Category category) 
+        private Quad CalculateCategoryProbability(Document document, Category category) 
         {
             Quad product = 1;
             Quad nom = category.wordCount + category.bagOfWords.Count * prior;
@@ -79,7 +79,6 @@ namespace LampMonster
                 int denom;
                 category.bagOfWords.TryGetValue(word, out denom);
                 denom += prior;
-                
                 product.Multiply(denom);
                 product.Divide(nom);
             }
@@ -87,7 +86,7 @@ namespace LampMonster
             return product * category.categoryProb;
         }
 
-        public string Classify(List<string> document)
+        public string Classify(Document document)
         {
             Quad max = 0.0d;
             Category selectedCategory = null;

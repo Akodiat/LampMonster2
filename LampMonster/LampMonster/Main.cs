@@ -14,44 +14,132 @@ namespace LampMonster
             var parser = new FileParser();
             var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, (s) => true);
 
-            NfoldCategorize(10, 100, classesData); 
-            NfoldIndomain(10, 100, classesData);
+
+            var testData = new List<List<ClassData>>(classesData.Count);
+            var trainingData = new List<List<ClassData>>(classesData.Count);
+            NfoldSplit(5, testData, trainingData, classesData);
+
+            var domainResults = Nfold(trainingData, testData, Domain);
+            var categorizationResults = Nfold(trainingData, testData, Categorize);
+
+            var recall = CalculateRecall(categorizationResults);
+            var precision = CalculatePrecision(categorizationResults);
+            var accuracy = CalculateAccuracy(categorizationResults);
          }
 
+        private static double CalculateAccuracy(double[,] confusionMatrix)
+        {
+            double diagonal = 0;
+            double total = 0;
+            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
+            {
+                diagonal += confusionMatrix[i, i];
+                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
+                {
+                    total += confusionMatrix[i, j];
+                }
+            }
+            return diagonal / total;
+        }
+
+        private static double[] CalculatePrecision(double[,] confusionMatrix)
+        {
+            var precision = new double[confusionMatrix.GetLength(0)];
+            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
+            {
+                double cii = confusionMatrix[i, i];
+                double columnValue = 0;
+                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
+                {
+                    columnValue += confusionMatrix[j, i];
+                }
+                precision[i] = cii / columnValue;
+            }
+
+            return precision;
+
+        }
+
+        private static double[] CalculateRecall(double[,] confusionMatrix)
+        {
+            var recall = new double[confusionMatrix.GetLength(0)];
+            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
+            {
+                double cii = confusionMatrix[i, i];
+                double rowValue = 0;
+                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
+                {
+                    rowValue += confusionMatrix[i,j];
+                }
+                recall[i] = cii / rowValue;
+            }
+
+            return recall;
+        }
+        
+        private static double[,] Nfold(List<List<ClassData>> trainingData, List<List<ClassData>> testData,
+                                       Action<List<ClassData>, List<ClassData>, double[,]> func)
+        {
+            int foldTimes = trainingData.Count;
+            int classCount = trainingData[0].Count;
+            var result = new double[classCount, classCount];
+            for (int i = 0; i < foldTimes; i++)
+            {
+                func(testData[i], trainingData[i], result);
+            }
+
+            for (int i = 0; i < classCount; i++)
+            {
+                for (int j = 0; j < classCount; j++)
+                {
+                    result[i, j] /= foldTimes;
+                }
+            }
+            
+            return result;
+        }
+
+
+        
+        private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result)
+        {
+            var indexMap = new Dictionary<string, int>();
+            for (int i = 0; i < testData.Count; i++)
+            {
+                indexMap[testData[i].ClassID] = i;
+            }
+
+            
+            var classifyer = CreateCategorizeClassifyer(testData, trainingData);
+            for (int i = 0; i < testData.Count; i++)
+            {
+                foreach (var document in testData[i].JoinedDocuments)
+                {
+                    string category = classifyer.Classify(document);
+                    int index = indexMap[category];
+                    result[i, index]++;
+                }
+            }
+        }
+
+
+
         #region Indomain
-        private static void NfoldIndomain(int n, int trainSize, List<ClassData> classesData)
+        private static void Domain(List<ClassData> testData, List<ClassData> trainingData, double[,] result)
         {
-
-            var accuracies = new double[classesData.Count];
-
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < testData.Count; i++)
             {
-                List<ClassData> testData = new List<ClassData>();
-                List<ClassData> trainingData = new List<ClassData>();
-
-                Split(classesData, testData, trainingData, trainSize);
-                Indomain(trainingData, testData, accuracies);
-            }
-
-            for (int i = 0; i < classesData.Count; i++)
-            {
-                Console.WriteLine("Accuracy indomain: algorithm={0}, trainingSize={1}, \n"
-                    + " category={2} is: {3}", "NaiveBayes", trainSize, classesData[i].ClassID, accuracies[i] / n);             
+                var classifyer = CreateDomainClassifier(trainingData[i], testData[i]);
+                for (int j = 0; j < testData.Count; j++)
+                {
+                    result[i, j] += RunTests(classifyer, testData[j].PosetiveDocuments, "pos");
+                    result[i, j] += RunTests(classifyer, testData[j].NegativeDocuments, "neg");
+                }
             }
         }
 
-        private static void Indomain(List<ClassData> trainingData, List<ClassData> testData, double[] accuracies)
+        private static Classifyer CreateDomainClassifier(ClassData training, ClassData test)
         {
-            //Change this code since it's wierd.
-            for (int i = 0; i < trainingData.Count; i++)
-            {
-                accuracies[i] += IndomainClass(trainingData[i], testData[i]);
-            }
-        }
-
-        private static double IndomainClass(ClassData training, ClassData test)
-        {
-            /////This step is will be fixed moved what ever
 
             Quad negProb = (Quad)test.NegativeDocuments.Count /
                            (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
@@ -63,55 +151,58 @@ namespace LampMonster
 
             //////////////////////////
 
-            var classifyer = CreateClassifyer(negCatData, posCatData);
-            int correctPos = RunTests(classifyer, test.PosetiveDocuments, "pos");
-            int correctNeg = RunTests(classifyer, test.NegativeDocuments, "neg");
+           return CreateClassifyer(negCatData, posCatData);
+        }
 
-            return (double)(correctNeg + correctPos) /
-                       (test.PosetiveDocuments.Count + test.NegativeDocuments.Count);
+        private static void NfoldSplit(int n, List<List<ClassData>> testData, List<List<ClassData>> trainingData, List<ClassData> classesData)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                testData.Add(new List<ClassData>());
+                trainingData.Add(new List<ClassData>());
+
+                for (int j = 0; j < classesData.Count; j++)
+                {
+                    ClassData c = classesData[j];
+
+                    int negChunkSize = c.NegativeDocuments.Count / n;
+                    int posChunkSize = c.PosetiveDocuments.Count / n;
+
+                    int negStart = negChunkSize * i;
+                    int posStart = posChunkSize * i;
+
+                    var posTrainingDocs = new List<Document>();
+                    var negTrainingDocs = new List<Document>();
+
+                    var posTestDocs = new List<Document>();
+                    var negTestDocs = new List<Document>();
+
+                    SplitIntoTestAndTraining(negChunkSize, negStart, negTrainingDocs,
+                                             negTestDocs, c.NegativeDocuments);
+                    SplitIntoTestAndTraining(posChunkSize, posStart, posTrainingDocs, 
+                                             posTestDocs, c.PosetiveDocuments);
+
+
+                    trainingData[i].Add(new ClassData(c.ClassID, posTrainingDocs, negTrainingDocs));
+                    testData[i].Add(new ClassData(c.ClassID, posTestDocs, negTestDocs));
+                }           
+            }
+        }
+
+        private static void SplitIntoTestAndTraining(int chunkSize, int start, List<Document> trainingDocs, List<Document> testDocs, List<Document> toSplit)
+        {
+            for (int i = 0; i < toSplit.Count; i++)
+            {
+                if (start <= i && start + chunkSize > i)
+                    testDocs.Add(toSplit[i]);
+                else
+                    trainingDocs.Add(toSplit[i]);
+            }
         }
 
         #endregion
 
         #region Categorize
-
-
-
-        public static void NfoldCategorize(int n, int trainSize, List<ClassData> classesData)
-        {
-            var accuracies = new double[classesData.Count];
-            for (int i = 0; i < n; i++)
-            {
-                List<ClassData> testData = new List<ClassData>();
-                List<ClassData> trainingData = new List<ClassData>();
-
-                Split(classesData, testData, trainingData, trainSize);
-                Categorize(testData, trainingData, accuracies);
-            }
-
-            for (int i = 0; i < classesData.Count; i++)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;  
-                Console.WriteLine("Accuracy categorize: algorithm={0}, trainingSize={1}, \n"
-                    + " category={2} is: {3}", "NaiveBayes", trainSize, classesData[i].ClassID, accuracies[i] / n);
-            }
-        }
-
-        private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[] accuracies)
-        {
-            var classifyer = CreateCategorizeClassifyer(testData, trainingData);
-
-            for (int i = 0; i < testData.Count; i++)
-            {
-                int correctCount = RunTests(classifyer, testData[i].PosetiveDocuments, testData[i].ClassID);
-                correctCount += RunTests(classifyer, testData[i].NegativeDocuments, testData[i].ClassID);
-
-                accuracies[i] += (double)(correctCount) / (testData[i].PosetiveDocuments.Count + testData[i].NegativeDocuments.Count);
-            }
-        }
-
-
-
         private static Classifyer CreateCategorizeClassifyer(List<ClassData> testData, List<ClassData> trainingData)
         {
             var list = new List<CategoryData>();
@@ -119,56 +210,21 @@ namespace LampMonster
             //We need this to calculate P(C) 
             int totalDocs = 0;
             foreach (var item in testData)
-                totalDocs += item.PosetiveDocuments.Count + item.NegativeDocuments.Count;
+                totalDocs += item.JoinedCount;
 
             foreach (var item in trainingData)
             {
-                var trainingDocs = new List<List<string>>();
-                trainingDocs.AddRange(item.PosetiveDocuments);
-                trainingDocs.AddRange(item.NegativeDocuments);
-
-                list.Add(new CategoryData(item.ClassID,
-                                          (Quadruple.Quad)trainingDocs.Count / totalDocs,
-                                          trainingDocs));
+                 list.Add(new CategoryData(item.ClassID,
+                                          (Quadruple.Quad)item.JoinedCount / totalDocs,
+                                          item.JoinedDocuments));
             }
 
             return CreateClassifyer(list.ToArray());
         }
 
-
         #endregion
 
-        private static void Split(List<ClassData> classesData, List<ClassData> testData, List<ClassData> trainingData, int sizeOfTrainData)
-        {
-            foreach (var classData in classesData)
-            {
-                var posDocs = Utils.CopyShuffle(classData.PosetiveDocuments);
-                var negDocs = Utils.CopyShuffle(classData.NegativeDocuments);
-
-                var trainingPosData = new List<List<string>>();
-                var trainingNegData = new List<List<string>>();
-                var testPosData = new List<List<string>>();
-                var testNegData = new List<List<string>>();
-
-                for (int i = 0; i < sizeOfTrainData; i++)
-                {
-                    trainingPosData.Add(posDocs[i]);
-                    trainingNegData.Add(negDocs[i]);
-                }
-
-                for (int i = sizeOfTrainData; i < posDocs.Count; i++)
-                    testPosData.Add(posDocs[i]);
-
-                for (int i = sizeOfTrainData; i < negDocs.Count; i++)
-                    testNegData.Add(negDocs[i]);
-
-                testData.Add(new ClassData(classData.ClassID, testPosData, testNegData));
-                trainingData.Add(new ClassData(classData.ClassID, trainingPosData, trainingNegData));
-            }
-        }
-
-
-        private static int RunTests(Classifyer classifyer, List<List<string>> testDocuments, string correctClass)
+        private static int RunTests(Classifyer classifyer, List<Document> testDocuments, string correctClass)
         {
             int correctCount = 0;
             foreach (var doc in testDocuments)
@@ -179,7 +235,6 @@ namespace LampMonster
             }
             return correctCount;
         }
-
 
         private static Classifyer CreateClassifyer(params CategoryData[] data)
         {

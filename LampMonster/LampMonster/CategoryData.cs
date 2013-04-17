@@ -7,19 +7,19 @@ using Quadruple;
 
 namespace LampMonster
 {
-    public sealed class CategoryData
+    sealed class CategoryData
     {
         public string ID { get; private set; }
         public Quad CategoryProb { get; private set; }
-        public List<List<string>> TrainingDocuments { get; private set; }
+        public List<Document> TrainingDocuments { get; private set; }
 
         public CategoryData(string id,
                             Quad categoryProb,
-                            List<List<string>> testData)
+                            List<Document> trainingData)
         {
             this.ID = id;
             this.CategoryProb = categoryProb;
-            this.TrainingDocuments = testData;
+            this.TrainingDocuments = trainingData;
         }
     }
 }
