@@ -65,6 +65,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
+    <Compile Include="McNemar.cs" />
     <Compile Include="NaiveBayesClassifyer.cs" />
     <Compile Include="PathFinders\IPathFinder.cs" />
     <Compile Include="PathFinders\OrderedPathFinder.cs" />
