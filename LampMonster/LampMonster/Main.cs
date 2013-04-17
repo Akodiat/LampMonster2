@@ -23,8 +23,10 @@ namespace LampMonster
             var trainingData = new List<List<ClassData>>(classesData.Count);
             NfoldSplit(5, testData, trainingData, classesData);
 
-            var domainResults = NfoldDomain(trainingData, testData);
-            var categorizationResults = NfoldCategorize(trainingData, testData);
+            var naiveBayesFactory = new NaiveBayesFactory(1);
+
+            var domainResults = NfoldDomain(trainingData, testData, naiveBayesFactory);
+            var categorizationResults = NfoldCategorize(trainingData, testData, naiveBayesFactory);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
@@ -81,14 +83,14 @@ namespace LampMonster
             return recall;
         }
 
-        private static double[,] NfoldCategorize(List<List<ClassData>> trainingData, List<List<ClassData>> testData)
+        private static double[,] NfoldCategorize(List<List<ClassData>> trainingData, List<List<ClassData>> testData, IClassificationFactory factory)
         {
             int foldTimes = trainingData.Count;
             int classCount = trainingData[0].Count;
             var result = new double[classCount, classCount];
             for (int i = 0; i < foldTimes; i++)
             {
-                Categorize(testData[i], trainingData[i], result);
+                Categorize(testData[i], trainingData[i], result, factory);
             }
 
             for (int i = 0; i < classCount; i++)
@@ -102,14 +104,15 @@ namespace LampMonster
             return result;
         }
 
-        private static TruthTable[,] NfoldDomain(List<List<ClassData>> trainingData, List<List<ClassData>> testData)
+        private static TruthTable[,] NfoldDomain(List<List<ClassData>> trainingData,
+                       List<List<ClassData>> testData, IClassificationFactory factory)
         {
             int foldTimes = trainingData.Count;
             int classCount = trainingData[0].Count;
             var result = new TruthTable[classCount, classCount];
             for (int i = 0; i < foldTimes; i++)
             {
-                Domain(testData[i], trainingData[i], result);
+                Domain(testData[i], trainingData[i], result, factory);
             }
 
             for (int i = 0; i < classCount; i++)
@@ -123,7 +126,7 @@ namespace LampMonster
             return result;
         }
         
-        private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result)
+        private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result, IClassificationFactory factory)
         {
             var indexMap = new Dictionary<string, int>();
             for (int i = 0; i < testData.Count; i++)
@@ -131,8 +134,8 @@ namespace LampMonster
                 indexMap[testData[i].ClassID] = i;
             }
 
-            
-            var classifyer = CreateCategorizeClassifyer(testData, trainingData);
+
+            var classifyer = factory.GetClassifyer(CreateCategorizeCategories(testData, trainingData));
             for (int i = 0; i < testData.Count; i++)
             {
                 foreach (var document in testData[i].JoinedDocuments)
@@ -145,13 +148,13 @@ namespace LampMonster
         }
 
 
-
-        #region Indomain
-        private static void Domain(List<ClassData> testData, List<ClassData> trainingData, TruthTable[,] result)
+        #region Sentiment
+        private static void Domain(List<ClassData> testData, List<ClassData> trainingData,
+                                   TruthTable[,] result, IClassificationFactory factory)
         {
             for (int i = 0; i < testData.Count; i++)
             {
-                var classifyer = CreateDomainClassifier(trainingData[i], testData[i]);
+                var classifyer = factory.GetClassifyer(CreateSentementCategories(trainingData[i], testData[i]));
                 for (int j = 0; j < testData.Count; j++)
                 {
                     result[i, j] += SentimentClassification(classifyer, testData[j]);
@@ -172,23 +175,6 @@ namespace LampMonster
             table.FalsePosetive = testData.NegativeDocuments.Count - negCount;
 
             return table;
-        }
-
-
-        private static Classifyer CreateDomainClassifier(ClassData training, ClassData test)
-        {
-
-            Quad negProb = (Quad)test.NegativeDocuments.Count /
-                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
-            Quad posProb = (Quad)test.PosetiveDocuments.Count /
-                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
-
-            var negCatData = new CategoryData("neg", negProb, training.NegativeDocuments);
-            var posCatData = new CategoryData("pos", posProb, training.PosetiveDocuments);
-
-            //////////////////////////
-
-           return CreateClassifyer(negCatData, posCatData);
         }
 
         private static void NfoldSplit(int n, List<List<ClassData>> testData, List<List<ClassData>> trainingData, List<ClassData> classesData)
@@ -240,7 +226,7 @@ namespace LampMonster
         #endregion
 
         #region Categorize
-        private static Classifyer CreateCategorizeClassifyer(List<ClassData> testData, List<ClassData> trainingData)
+        private static List<CategoryData> CreateCategorizeCategories(List<ClassData> testData, List<ClassData> trainingData)
         {
             var list = new List<CategoryData>();
 
@@ -256,8 +242,23 @@ namespace LampMonster
                                           item.JoinedDocuments));
             }
 
-            return CreateClassifyer(list.ToArray());
+            return list;
         }
+
+        private static List<CategoryData> CreateSentementCategories(ClassData training, ClassData test)
+        {
+            Quad negProb = (Quad)test.NegativeDocuments.Count /
+                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
+            Quad posProb = (Quad)test.PosetiveDocuments.Count /
+                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
+
+            var list = new List<CategoryData>();
+            list.Add(new CategoryData("neg", negProb, training.NegativeDocuments));
+            list.Add(new CategoryData("pos", posProb, training.PosetiveDocuments));
+
+            return list;
+        }
+
 
         #endregion
 
@@ -271,11 +272,6 @@ namespace LampMonster
                     correctCount++;
             }
             return correctCount;
-        }
-
-        private static Classifyer CreateClassifyer(params CategoryData[] data)
-        {
-            return new NaiveBayesClassifyer(data.ToList(), 1);
         }
     }
 }
