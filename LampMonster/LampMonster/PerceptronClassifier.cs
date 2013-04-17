@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
+	
     class PerceptronClassifier : Classifyer
     {
+		static private int fails = 0;
         private class Document
         {
             public readonly string category;
@@ -25,6 +27,19 @@ namespace LampMonster
         public PerceptronClassifier(List<CategoryData> trainingDocs, 
 										float learningRate, int iterations, float bias)
         {
+			//Construct vocabulary
+			ISet<string> vocabulary = new HashSet<string>();
+            foreach (var category in trainingDocs)
+            {
+                foreach (var doc in category.TrainingDocuments)
+                {
+                    foreach (var word in doc)
+                    {
+                        vocabulary.Add(word);
+                    }
+                }
+            }
+			
 			this.perceptrons = new List<Perceptron>();
 
 			foreach(var cat in trainingDocs)
@@ -42,7 +57,8 @@ namespace LampMonster
 						docsNotInCategory,
 						learningRate,
 						iterations,
-						bias));
+						bias,
+                        vocabulary));
             }
 
         }
@@ -53,7 +69,9 @@ namespace LampMonster
                 if (perceptron.Classify(document))
                     return perceptron.Category;
             }
-            throw new ArgumentOutOfRangeException("Document was not able to be classified");
+            Console.WriteLine("Couldn't classify document times: " + ++fails);
+            return "failure";
+            //throw new ArgumentOutOfRangeException("Document was not able to be classified");
         }
     }
 }
