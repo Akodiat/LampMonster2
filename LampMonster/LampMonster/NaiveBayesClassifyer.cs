@@ -69,30 +69,30 @@ namespace LampMonster
         }
 
 
-        private Quad CalculateCategoryProbability(Document document, Category category) 
+        private double CalculateCategoryProbability(Document document, Category category) 
         {
-            Quad product = 1;
-            Quad nom = category.wordCount + category.bagOfWords.Count * prior;
+            double product = 0;
+            double nom = category.wordCount + category.bagOfWords.Count * prior;
 
             foreach (var word in document)
             {
                 int denom;
                 category.bagOfWords.TryGetValue(word, out denom);
                 denom += prior;
-                product.Multiply(denom);
-                product.Divide(nom);
+
+                product += Math.Log(denom / nom);
             }
 
-            return product * category.categoryProb;
+            return product + Math.Log((double)category.categoryProb);
         }
 
         public string Classify(Document document)
         {
-            Quad max = 0.0d;
+            double max = double.NegativeInfinity;
             Category selectedCategory = null;
             foreach (var category in this.categories)
             {
-                Quad probability = CalculateCategoryProbability(document, category);
+                double probability = CalculateCategoryProbability(document, category);
                 if (probability > max)
                 {
                     max = probability;
