@@ -8,6 +8,6 @@ namespace LampMonster
 {
     class McNemar
     {
-        double calcTestStatistic(int pos_neg, int neg_pos)
+        //double calcTestStatistic(int pos_neg, int neg_pos)
     }
 }

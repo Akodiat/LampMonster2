@@ -53,8 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />
+    <Compile Include="ClassificationFactory.cs" />
     <Compile Include="Classifyer.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="FileParser.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="PathFinders\OrderedPathFinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SentimentClassificationManager.cs" />
     <Compile Include="TruthTable.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Form1.resx">

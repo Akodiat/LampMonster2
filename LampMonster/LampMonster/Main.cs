@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-
-
-
-
     class Main
     {
         public static void Start()
@@ -24,9 +20,11 @@ namespace LampMonster
             NfoldSplit(5, testData, trainingData, classesData);
 
             var naiveBayesFactory = new NaiveBayesFactory(1);
+            var sentimentManager = new SentimentClassificationManager(testData, trainingData);
+            var categorizeManager = new CategorizeClassificationManager(testData, trainingData);
 
-            var domainResults = NfoldDomain(trainingData, testData, naiveBayesFactory);
-            var categorizationResults = NfoldCategorize(trainingData, testData, naiveBayesFactory);
+            var domainResults = sentimentManager.RunTests(naiveBayesFactory);
+            var categorizationResults = categorizeManager.RunTests(naiveBayesFactory);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
@@ -83,99 +81,7 @@ namespace LampMonster
             return recall;
         }
 
-        private static double[,] NfoldCategorize(List<List<ClassData>> trainingData, List<List<ClassData>> testData, IClassificationFactory factory)
-        {
-            int foldTimes = trainingData.Count;
-            int classCount = trainingData[0].Count;
-            var result = new double[classCount, classCount];
-            for (int i = 0; i < foldTimes; i++)
-            {
-                Categorize(testData[i], trainingData[i], result, factory);
-            }
-
-            for (int i = 0; i < classCount; i++)
-            {
-                for (int j = 0; j < classCount; j++)
-                {
-                    result[i, j] /= foldTimes;
-                }
-            }
-
-            return result;
-        }
-
-        private static TruthTable[,] NfoldDomain(List<List<ClassData>> trainingData,
-                       List<List<ClassData>> testData, IClassificationFactory factory)
-        {
-            int foldTimes = trainingData.Count;
-            int classCount = trainingData[0].Count;
-            var result = new TruthTable[classCount, classCount];
-            for (int i = 0; i < foldTimes; i++)
-            {
-                Domain(testData[i], trainingData[i], result, factory);
-            }
-
-            for (int i = 0; i < classCount; i++)
-            {
-                for (int j = 0; j < classCount; j++)
-                {
-                    result[i, j] /= foldTimes;
-                }
-            }
-
-            return result;
-        }
-        
-        private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result, IClassificationFactory factory)
-        {
-            var indexMap = new Dictionary<string, int>();
-            for (int i = 0; i < testData.Count; i++)
-            {
-                indexMap[testData[i].ClassID] = i;
-            }
-
-
-            var classifyer = factory.GetClassifyer(CreateCategorizeCategories(testData, trainingData));
-            for (int i = 0; i < testData.Count; i++)
-            {
-                foreach (var document in testData[i].JoinedDocuments)
-                {
-                    string category = classifyer.Classify(document);
-                    int index = indexMap[category];
-                    result[i, index]++;
-                }
-            }
-        }
-
-
-        #region Sentiment
-        private static void Domain(List<ClassData> testData, List<ClassData> trainingData,
-                                   TruthTable[,] result, IClassificationFactory factory)
-        {
-            for (int i = 0; i < testData.Count; i++)
-            {
-                var classifyer = factory.GetClassifyer(CreateSentementCategories(trainingData[i], testData[i]));
-                for (int j = 0; j < testData.Count; j++)
-                {
-                    result[i, j] += SentimentClassification(classifyer, testData[j]);
-                }
-            }
-        }
-
-        private static TruthTable SentimentClassification(Classifyer classifyer, ClassData testData)
-        {
-            var table = new TruthTable();
-
-            int posCount = RunTests(classifyer, testData.PosetiveDocuments, "pos");
-            int negCount = RunTests(classifyer, testData.NegativeDocuments, "neg");
-
-            table.TruePosetive = posCount;
-            table.FalseNegative = testData.PosetiveDocuments.Count - posCount;
-            table.TrueNegative = negCount;
-            table.FalsePosetive = testData.NegativeDocuments.Count - negCount;
-
-            return table;
-        }
+       
 
         private static void NfoldSplit(int n, List<List<ClassData>> testData, List<List<ClassData>> trainingData, List<ClassData> classesData)
         {
@@ -221,57 +127,6 @@ namespace LampMonster
                 else
                     trainingDocs.Add(toSplit[i]);
             }
-        }
-
-        #endregion
-
-        #region Categorize
-        private static List<CategoryData> CreateCategorizeCategories(List<ClassData> testData, List<ClassData> trainingData)
-        {
-            var list = new List<CategoryData>();
-
-            //We need this to calculate P(C) 
-            int totalDocs = 0;
-            foreach (var item in testData)
-                totalDocs += item.JoinedCount;
-
-            foreach (var item in trainingData)
-            {
-                 list.Add(new CategoryData(item.ClassID,
-                                          (Quadruple.Quad)item.JoinedCount / totalDocs,
-                                          item.JoinedDocuments));
-            }
-
-            return list;
-        }
-
-        private static List<CategoryData> CreateSentementCategories(ClassData training, ClassData test)
-        {
-            Quad negProb = (Quad)test.NegativeDocuments.Count /
-                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
-            Quad posProb = (Quad)test.PosetiveDocuments.Count /
-                           (test.NegativeDocuments.Count + test.PosetiveDocuments.Count);
-
-            var list = new List<CategoryData>();
-            list.Add(new CategoryData("neg", negProb, training.NegativeDocuments));
-            list.Add(new CategoryData("pos", posProb, training.PosetiveDocuments));
-
-            return list;
-        }
-
-
-        #endregion
-
-        private static int RunTests(Classifyer classifyer, List<Document> testDocuments, string correctClass)
-        {
-            int correctCount = 0;
-            foreach (var doc in testDocuments)
-            {
-                var c = classifyer.Classify(doc);
-                if (c == correctClass)
-                    correctCount++;
-            }
-            return correctCount;
-        }
+        }   
     }
 }
