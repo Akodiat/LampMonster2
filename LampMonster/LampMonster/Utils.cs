@@ -8,7 +8,7 @@ namespace LampMonster
 {
     class Utils
     {
-        private const int SEED = 1;
+        private const int SEED = 2;
         private static Random random = new Random(SEED);
 
         public static List<T> CopyShuffle<T>(List<T> list)

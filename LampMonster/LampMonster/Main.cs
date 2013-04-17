@@ -14,10 +14,9 @@ namespace LampMonster
             var parser = new FileParser();
             var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, (s) => true);
 
-
             var testData = new List<List<ClassData>>(classesData.Count);
             var trainingData = new List<List<ClassData>>(classesData.Count);
-            NfoldSplit(5, testData, trainingData, classesData);
+            NfoldSplit(2, testData, trainingData, classesData);
 
             var naiveBayesFactory = new NaiveBayesFactory(1);
             var sentimentManager = new SentimentClassificationManager(testData, trainingData);
@@ -29,7 +28,45 @@ namespace LampMonster
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
             var accuracy = CalculateAccuracy(categorizationResults);
+
+            PrintResult(classesData, domainResults, categorizationResults);
          }
+
+        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults)
+        {
+
+            Console.WriteLine("SENTIMENT ANALISYS\n\n\n\n");
+
+            for (int i = 0; i < domainResults.GetLength(0); i++)
+            {
+                for (int j = 0; j < domainResults.GetLength(1); j++)
+                {
+                    Console.WriteLine("{0} train {1} test result:    \t{2}",
+                            classesData[i].ClassID,
+                            classesData[j].ClassID, domainResults[i, j]);
+                }
+            }
+
+            Console.WriteLine("CATEGORIZATION");
+            Console.Write("\t\t");
+
+            for (int i = 0; i < classesData.Count; i++)
+            {
+                Console.Write(classesData[i].ClassID + "\t");
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < categorizationResults.GetLength(0); i++)
+            {
+                Console.Write(classesData[i].ClassID + "\t\t");
+                for (int j = 0; j < categorizationResults.GetLength(1); j++)
+                {
+                    Console.Write("{0}\t", categorizationResults[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+        }
 
         private static double CalculateAccuracy(double[,] confusionMatrix)
         {
