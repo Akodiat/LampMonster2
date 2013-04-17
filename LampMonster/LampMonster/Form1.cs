@@ -21,7 +21,6 @@ namespace LampMonster
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             Main.Start();
         }
     }
