@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
+
+
+
+
     class Main
     {
         public static void Start()
@@ -19,8 +23,8 @@ namespace LampMonster
             var trainingData = new List<List<ClassData>>(classesData.Count);
             NfoldSplit(5, testData, trainingData, classesData);
 
-            var domainResults = Nfold(trainingData, testData, Domain);
-            var categorizationResults = Nfold(trainingData, testData, Categorize);
+            var domainResults = NfoldDomain(trainingData, testData);
+            var categorizationResults = NfoldCategorize(trainingData, testData);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
@@ -76,16 +80,15 @@ namespace LampMonster
 
             return recall;
         }
-        
-        private static double[,] Nfold(List<List<ClassData>> trainingData, List<List<ClassData>> testData,
-                                       Action<List<ClassData>, List<ClassData>, double[,]> func)
+
+        private static double[,] NfoldCategorize(List<List<ClassData>> trainingData, List<List<ClassData>> testData)
         {
             int foldTimes = trainingData.Count;
             int classCount = trainingData[0].Count;
             var result = new double[classCount, classCount];
             for (int i = 0; i < foldTimes; i++)
             {
-                func(testData[i], trainingData[i], result);
+                Categorize(testData[i], trainingData[i], result);
             }
 
             for (int i = 0; i < classCount; i++)
@@ -95,11 +98,30 @@ namespace LampMonster
                     result[i, j] /= foldTimes;
                 }
             }
-            
+
             return result;
         }
 
+        private static TruthTable[,] NfoldDomain(List<List<ClassData>> trainingData, List<List<ClassData>> testData)
+        {
+            int foldTimes = trainingData.Count;
+            int classCount = trainingData[0].Count;
+            var result = new TruthTable[classCount, classCount];
+            for (int i = 0; i < foldTimes; i++)
+            {
+                Domain(testData[i], trainingData[i], result);
+            }
 
+            for (int i = 0; i < classCount; i++)
+            {
+                for (int j = 0; j < classCount; j++)
+                {
+                    result[i, j] /= foldTimes;
+                }
+            }
+
+            return result;
+        }
         
         private static void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result)
         {
@@ -125,18 +147,33 @@ namespace LampMonster
 
 
         #region Indomain
-        private static void Domain(List<ClassData> testData, List<ClassData> trainingData, double[,] result)
+        private static void Domain(List<ClassData> testData, List<ClassData> trainingData, TruthTable[,] result)
         {
             for (int i = 0; i < testData.Count; i++)
             {
                 var classifyer = CreateDomainClassifier(trainingData[i], testData[i]);
                 for (int j = 0; j < testData.Count; j++)
                 {
-                    result[i, j] += RunTests(classifyer, testData[j].PosetiveDocuments, "pos");
-                    result[i, j] += RunTests(classifyer, testData[j].NegativeDocuments, "neg");
+                    result[i, j] += SentimentClassification(classifyer, testData[j]);
                 }
             }
         }
+
+        private static TruthTable SentimentClassification(Classifyer classifyer, ClassData testData)
+        {
+            var table = new TruthTable();
+
+            int posCount = RunTests(classifyer, testData.PosetiveDocuments, "pos");
+            int negCount = RunTests(classifyer, testData.NegativeDocuments, "neg");
+
+            table.TruePosetive = posCount;
+            table.FalseNegative = testData.PosetiveDocuments.Count - posCount;
+            table.TrueNegative = negCount;
+            table.FalsePosetive = testData.NegativeDocuments.Count - negCount;
+
+            return table;
+        }
+
 
         private static Classifyer CreateDomainClassifier(ClassData training, ClassData test)
         {
