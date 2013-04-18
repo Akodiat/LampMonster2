@@ -31,6 +31,7 @@ namespace LampMonster
             var accuracy = CalculateAccuracy(categorizationResults);
 
             PrintResult(classesData, domainResults, categorizationResults, mcNemarResults);
+
          }
 
         private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults)
@@ -45,6 +46,12 @@ namespace LampMonster
                     Console.WriteLine("{0} train {1} test result:    \t{2}",
                             classesData[i].ClassID,
                             classesData[j].ClassID, domainResults[i, j]);
+                    Console.WriteLine("Accuracy {0}, Recall: Pos {1} Neg {2}, Precision: Pos {3} Neg {4}",
+                                      domainResults[i, j].GetAccuracy(),
+                                      domainResults[i, j].GetRecall()[0],
+                                      domainResults[i, j].GetRecall()[1],
+                                      domainResults[i, j].GetPercision()[0],
+                                      domainResults[i, j].GetPercision()[1]);
                 }
             }
 

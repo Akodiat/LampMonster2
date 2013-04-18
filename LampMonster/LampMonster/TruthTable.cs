@@ -13,6 +13,34 @@ namespace LampMonster
         public double TruePosetive;
         public double TrueNegative;
 
+
+
+        public double[] GetRecall()
+        {
+            return new double[] 
+            {  
+                TruePosetive / (TruePosetive + FalseNegative) ,
+                TrueNegative / (TrueNegative + FalsePosetive)
+            };
+        }
+
+        public double[] GetPercision()
+        {
+            return new double[]
+            {
+                TruePosetive / (TruePosetive + FalsePosetive),
+                TrueNegative / (TrueNegative + FalseNegative)
+            };
+        }
+
+        public double GetAccuracy()
+        {
+            double nom = TruePosetive + TrueNegative;
+            double denom = nom + FalseNegative + FalsePosetive;
+
+            return nom / denom;
+        }
+
         public static TruthTable operator +(TruthTable lhs, TruthTable rhs)
         {
             TruthTable table;

@@ -67,9 +67,7 @@ namespace LampMonster
                 }
             }
         }
-
-
-
+        
         private List<CategoryData> CreateCategories(ClassData training, ClassData test)
         {
             Quad negProb = (Quad)test.NegativeDocuments.Count /
