@@ -43,10 +43,10 @@ namespace LampMonster
             {
                 for (int j = 0; j < domainResults.GetLength(1); j++)
                 {
-                    Console.WriteLine("{0} train {1} test result:    \t{2}",
+                    Console.WriteLine("{0} train {1} test \nresult:    \t{2}",
                             classesData[i].ClassID,
                             classesData[j].ClassID, domainResults[i, j]);
-                    Console.WriteLine("Accuracy {0}, Recall: Pos {1} Neg {2}, Precision: Pos {3} Neg {4}",
+                    Console.WriteLine("Accuracy {0}\nRecall: Pos {1}, Neg {2},\nPrecision: Pos {3} Neg {4} \n\n",
                                       domainResults[i, j].GetAccuracy(),
                                       domainResults[i, j].GetRecall()[0],
                                       domainResults[i, j].GetRecall()[1],
