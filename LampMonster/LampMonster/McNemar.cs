@@ -15,16 +15,10 @@ namespace LampMonster
         public static double[,] test(TruthTable[,] truthTables)
         {
             int numberOfCategories = (int) Math.Sqrt(truthTables.Length);
-            Console.WriteLine("Weeeeee: McNemar");
             var result = new double[numberOfCategories, numberOfCategories];
-            for(int i=0; i<numberOfCategories; i++){
-                for (int j = 0; j < numberOfCategories; j++){
+            for(int i=0; i<numberOfCategories; i++)
+                for (int j = 0; j < numberOfCategories; j++)
                     result[i,j] = calcTestStatistic(truthTables[i, j].FalsePosetive, truthTables[i, j].FalseNegative);
-                    Console.WriteLine("({0},{1}) {2}\t", i, j, result[i, j]);
-                }
-                Console.WriteLine("\n");
-            }
-
             return result;
         }
     }
