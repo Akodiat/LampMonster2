@@ -73,8 +73,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="McNemar.cs" />
     <Compile Include="NaiveBayesClassifyer.cs" />
-    <Compile Include="PathFinders\IPathFinder.cs" />
-    <Compile Include="PathFinders\OrderedPathFinder.cs" />
     <Compile Include="Perceptron.cs" />
     <Compile Include="PerceptronClassifier.cs" />
     <Compile Include="Program.cs" />
