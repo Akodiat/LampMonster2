@@ -23,5 +23,18 @@ namespace LampMonster
         {
             Main.Start();
         }
+        public void sendToDiagram(double[,] data, string name)
+        {
+           //var series = new System.Windows.Forms.DataVisualization.Charting.Series();
+
+            for (int i = 0; i < data.GetLength(0); i++)
+            {
+                for (int j = 0; j < data.GetLength(1); j++)
+                {
+                    chart1.Series[0].Points.AddXY(i, j, data[i,j]);
+                }
+            }
+            chart1.Series[0].Name = name;
+        }
     }
 }

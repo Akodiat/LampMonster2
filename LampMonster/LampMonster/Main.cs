@@ -50,7 +50,7 @@ namespace LampMonster
 
             Console.WriteLine("CATEGORIZATION");
             Console.Write("\t\t");
-
+            
             for (int i = 0; i < classesData.Count; i++)
             {
                 Console.Write(classesData[i].ClassID + "\t");
@@ -85,6 +85,9 @@ namespace LampMonster
                 }
                 Console.WriteLine();
             }
+            Form1 form = (Form1) Form1.ActiveForm;
+            form.sendToDiagram(mcNemarResults, "McNemar");
+            
         }
 
         private static double CalculateAccuracy(double[,] confusionMatrix)
