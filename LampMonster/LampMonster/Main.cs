@@ -36,64 +36,64 @@ namespace LampMonster
 
         private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults)
         {
-
-            Console.WriteLine("SENTIMENT ANALISYS\n\n\n\n");
-
+            String result = "Statistic results - "+System.DateTime.Now+"\n\n";
+            result +="SENTIMENT ANALISYS\n\n\n\n";
+            
             for (int i = 0; i < domainResults.GetLength(0); i++)
             {
                 for (int j = 0; j < domainResults.GetLength(1); j++)
                 {
-                    Console.WriteLine("{0} train {1} test \nresult:    \t{2}",
-                            classesData[i].ClassID,
-                            classesData[j].ClassID, domainResults[i, j]);
-                    Console.WriteLine("Accuracy {0}\nRecall: Pos {1}, Neg {2},\nPrecision: Pos {3} Neg {4} \n\n",
-                                      domainResults[i, j].GetAccuracy(),
-                                      domainResults[i, j].GetRecall()[0],
-                                      domainResults[i, j].GetRecall()[1],
-                                      domainResults[i, j].GetPercision()[0],
-                                      domainResults[i, j].GetPercision()[1]);
+                    result +=classesData[i].ClassID + "train "+classesData[j].ClassID+" test \nresult:    \t"+ domainResults[i, j];
+                    result += "Accuracy "+domainResults[i, j].GetAccuracy()+
+                        "\nRecall: Pos "+domainResults[i, j].GetRecall()[0]+
+                        ", Neg "+domainResults[i, j].GetRecall()[1]+
+                        ",\nPrecision: Pos "+domainResults[i, j].GetPercision()[0]+
+                        " Neg "+domainResults[i, j].GetPercision()[1]+" \n\n";
                 }
             }
 
-            Console.WriteLine("CATEGORIZATION");
-            Console.Write("\t\t");
+            result +="CATEGORIZATION\n\n";
             
             for (int i = 0; i < classesData.Count; i++)
             {
-                Console.Write(classesData[i].ClassID + "\t");
+                result += classesData[i].ClassID + "\t";
             }
-            Console.WriteLine();
+            result += "\n";
 
             for (int i = 0; i < categorizationResults.GetLength(0); i++)
             {
-                Console.Write(classesData[i].ClassID + "\t\t");
+                result += classesData[i].ClassID + "\t\t";
                 for (int j = 0; j < categorizationResults.GetLength(1); j++)
                 {
-                    Console.Write("{0}\t", categorizationResults[i, j]);
+                    result += categorizationResults[i, j] +"\t";
                 }
-                Console.WriteLine();
+                result += "\n";
             }
-            
-            Console.WriteLine("\n\nMcNEMAR");
-            Console.Write("\t\t");
+            result += "\nnMcNEMAR";
+            result += "\t\t";
 
             for (int i = 0; i < classesData.Count; i++)
             {
-                Console.Write(classesData[i].ClassID + "\t");
+                result += classesData[i].ClassID + "\t";
             }
-            Console.WriteLine();
+            result += "\n";
 
             for (int i = 0; i < mcNemarResults.GetLength(0); i++)
             {
-                Console.Write(classesData[i].ClassID + "\t\t");
+                result += classesData[i].ClassID + "\t\t";
                 for (int j = 0; j < mcNemarResults.GetLength(1); j++)
                 {
-                    Console.Write("{0}\t", Math.Round(mcNemarResults[i, j], 3));
+                    result +=Math.Round(mcNemarResults[i, j], 3) +"\t";
                 }
-                Console.WriteLine();
+                result += "\n";
             }
             Form1 form = (Form1) Form1.ActiveForm;
             form.sendToDiagram(mcNemarResults, "McNemar");
+
+            System.IO.StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/stats"+System.DateTime.Now+".txt");
+            file.WriteLine(result);
+
+            file.Close();
             
         }
 
