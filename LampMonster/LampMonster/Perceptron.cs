@@ -24,7 +24,7 @@ namespace LampMonster
         {
             get { return bias; }
         }
-        public Perceptron(string category, List<List<string>> docsOfCategory, List<List<string>> docsNotOfCat,
+        public Perceptron(string category, List<Document> docsOfCategory, List<Document> docsNotOfCat,
 							 float learningRate, int iterations, float bias, ISet<string> vocabulary)
         {
             if (learningRate <= 0 || learningRate >= 1)
@@ -53,11 +53,14 @@ namespace LampMonster
                     this.Learn(false, doc);
                 }
             }
+            List<KeyValuePair<string, float>> weightList = weightVector.ToList();
+            weightList.Sort((firstPair, nextPair) => { return firstPair.Value.CompareTo(nextPair.Value); });
+
         }
 
-        private void Learn(bool p, List<string> doc)
+        private void Learn(bool p, Document doc)
         {
-            if (p ^ Classify(doc)) // if p and Classify don't agree on the category
+            if (p ^ (Classify(doc)>=0)) // if p and Classify don't agree on the category
             {
                 foreach (var word in doc)
                 {
@@ -66,7 +69,7 @@ namespace LampMonster
             }
         }
 
-        public bool Classify(List<string> doc)
+        public float Classify(Document doc)
         {
             float dotProduct = bias;
             foreach (var word in doc)
@@ -75,7 +78,7 @@ namespace LampMonster
                 if (weightVector.TryGetValue(word, out weightOfWord))
                     dotProduct += weightOfWord;
             }
-            return dotProduct >= 0;
+            return dotProduct;
         }
     }
 }

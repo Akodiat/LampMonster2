@@ -10,18 +10,6 @@ namespace LampMonster
     class PerceptronClassifier : Classifyer
     {
 		static private int fails = 0;
-        private class Document
-        {
-            public readonly string category;
-            public readonly Dictionary<string, int> bagOfWords;
-
-            public Document(string category, Dictionary<string, int> bagOfWords)
-            {
-                this.category = category;
-                this.bagOfWords = bagOfWords;
-            }
-        }
-
         List<Perceptron> perceptrons;
 
         public PerceptronClassifier(List<CategoryData> trainingDocs, 
@@ -44,7 +32,7 @@ namespace LampMonster
 
 			foreach(var cat in trainingDocs)
 			{
-				List<List<string>> docsNotInCategory = new List<List<string>>();
+				List<Document> docsNotInCategory = new List<Document>();
 				foreach (var cat2 in trainingDocs)
 				{
 						if(cat2.ID != cat.ID)
@@ -62,15 +50,23 @@ namespace LampMonster
             }
 
         }
-        public string Classify(List<string> document)
+        public string Classify(Document document)
         {
+            string category = "failure";
+            float highest = float.NegativeInfinity;
             foreach (var perceptron in perceptrons)
             {
-                if (perceptron.Classify(document))
-                    return perceptron.Category;
+				float perceptronOutput = perceptron.Classify(document);
+                if (perceptronOutput > highest)
+                {
+                    highest = perceptronOutput;
+                    category = perceptron.Category;
+                }
             }
-            Console.WriteLine("Couldn't classify document times: " + ++fails);
-            return "failure";
+            //Console.WriteLine("Couldn't classify document times: " + ++fails);
+            if (category == "failure")
+                throw new ArgumentException("WTF");
+            return category;
             //throw new ArgumentOutOfRangeException("Document was not able to be classified");
         }
     }
