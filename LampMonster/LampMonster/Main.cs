@@ -24,15 +24,16 @@ namespace LampMonster
 
             var domainResults = sentimentManager.RunTests(naiveBayesFactory);
             var categorizationResults = categorizeManager.RunTests(naiveBayesFactory);
+            var mcNemarResults = McNemar.test(domainResults);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
             var accuracy = CalculateAccuracy(categorizationResults);
 
-            PrintResult(classesData, domainResults, categorizationResults);
+            PrintResult(classesData, domainResults, categorizationResults, mcNemarResults);
          }
 
-        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults)
+        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults)
         {
 
             Console.WriteLine("SENTIMENT ANALISYS\n\n\n\n");
@@ -65,7 +66,25 @@ namespace LampMonster
                 }
                 Console.WriteLine();
             }
+            
+            Console.WriteLine("\n\nMcNEMAR");
+            Console.Write("\t\t");
 
+            for (int i = 0; i < classesData.Count; i++)
+            {
+                Console.Write(classesData[i].ClassID + "\t");
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < mcNemarResults.GetLength(0); i++)
+            {
+                Console.Write(classesData[i].ClassID + "\t\t");
+                for (int j = 0; j < mcNemarResults.GetLength(1); j++)
+                {
+                    Console.Write("{0}\t", Math.Round(mcNemarResults[i, j], 3));
+                }
+                Console.WriteLine();
+            }
         }
 
         private static double CalculateAccuracy(double[,] confusionMatrix)
