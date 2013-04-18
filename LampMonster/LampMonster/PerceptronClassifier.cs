@@ -9,11 +9,10 @@ namespace LampMonster
 	
     class PerceptronClassifier : Classifyer
     {
-		static private int fails = 0;
         List<Perceptron> perceptrons;
 
         public PerceptronClassifier(List<CategoryData> trainingDocs, 
-										float learningRate, int iterations, float bias)
+										double learningRate, int iterations, double bias)
         {
 			//Construct vocabulary
 			ISet<string> vocabulary = new HashSet<string>();
@@ -53,10 +52,10 @@ namespace LampMonster
         public string Classify(Document document)
         {
             string category = "failure";
-            float highest = float.NegativeInfinity;
+            double highest = double.NegativeInfinity;
             foreach (var perceptron in perceptrons)
             {
-				float perceptronOutput = perceptron.Classify(document);
+				double perceptronOutput = perceptron.Classify(document);
                 if (perceptronOutput > highest)
                 {
                     highest = perceptronOutput;

@@ -28,20 +28,35 @@ namespace LampMonster
 
     class PerceptronFactory : IClassificationFactory
     {
-        private int iterations;
-        private float learningRate;
-        private float bias;
+        protected int iterations;
+        protected double learningRate;
+        protected double bias;
 
-        public PerceptronFactory(int iterations, float learningRate, float bias)
+        public PerceptronFactory(int iterations, double learningRate, double bias)
         {
             this.iterations = iterations;
             this.learningRate = learningRate;
             this.bias = bias;
         }
 
-        public Classifyer GetClassifyer(List<CategoryData> categories)
+        public virtual Classifyer GetClassifyer(List<CategoryData> categories)
         {
             return new PerceptronClassifier(categories, learningRate, iterations, bias);
+        }
+    }
+
+    class AveragedPerceptronFactory : PerceptronFactory
+    {
+
+        public AveragedPerceptronFactory(int iterations, double learningRate, double bias)
+			:base(iterations, learningRate, bias)
+        {
+            
+        }
+
+        public override Classifyer GetClassifyer(List<CategoryData> categories)
+        {
+            return new AveragedPerceptronClassifier(categories, learningRate, iterations, bias);
         }
     }
 }

@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AveragedPerceptron.cs" />
+    <Compile Include="AveragedPerceptronClassifier.cs" />
     <Compile Include="CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />

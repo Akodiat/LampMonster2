@@ -18,7 +18,7 @@ namespace LampMonster
             var trainingData = new List<List<ClassData>>(classesData.Count);
             NfoldSplit(5, testData, trainingData, classesData);
 
-            var naiveBayesFactory = new NaiveBayesFactory(1);
+            var naiveBayesFactory = new PerceptronFactory(200, 0.5, 5);// new NaiveBayesFactory(1);
             var sentimentManager = new SentimentClassificationManager(testData, trainingData);
             var categorizeManager = new CategorizeClassificationManager(testData, trainingData);
 
