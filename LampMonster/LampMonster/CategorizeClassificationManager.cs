@@ -27,7 +27,6 @@ namespace LampMonster
             }
         }
 
-
         public CategorizeClassificationManager(List<List<ClassData>> testData, 
                                                List<List<ClassData>> trainingData)
         {
@@ -35,32 +34,42 @@ namespace LampMonster
             this.trainingData = trainingData;
         }
 
-
-
         public double[,] RunTests(IClassificationFactory factory)
         {
-            int foldTimes = trainingData.Count;
-            int classCount = trainingData[0].Count;
-            var result = new double[classCount, classCount];
-            for (int i = 0; i < foldTimes; i++)
+            var result = new double[NfoldCount][,];
+            var tasks = new Task[NfoldCount];
+            for (int i = 0; i < NfoldCount; i++)
             {
-                Categorize(testData[i], trainingData[i], result, factory);
+                int taskIndex = i;
+                tasks[i] = new Task(() =>
+                {
+                    result[taskIndex] = Categorize(testData[taskIndex], trainingData[taskIndex], factory);
+                });
+                tasks[i].Start();
             }
 
-            for (int i = 0; i < classCount; i++)
+            Task.WaitAll(tasks);
+
+            var totalResult = new double[CategoryCount, CategoryCount];
+            for (int k = 0; k < NfoldCount; k++)
             {
-                for (int j = 0; j < classCount; j++)
+                double[,] partialResult = result[k];
+                for (int i = 0; i < CategoryCount; i++)
                 {
-                    result[i, j] /= foldTimes;
+                    for (int j = 0; j < CategoryCount; j++)
+                    {
+                        totalResult[i, j] += partialResult[i, j] / NfoldCount;
+                    }
                 }
             }
 
-            return result;
+            return totalResult;
         }
 
 
-        private void Categorize(List<ClassData> testData, List<ClassData> trainingData, double[,] result, IClassificationFactory factory)
+        private double[,] Categorize(List<ClassData> testData, List<ClassData> trainingData, IClassificationFactory factory)
         {
+            var result = new double[CategoryCount, CategoryCount];
             var indexMap = new Dictionary<string, int>();
             for (int i = 0; i < testData.Count; i++)
             {
@@ -77,6 +86,8 @@ namespace LampMonster
                     result[i, index]++;
                 }
             }
+
+            return result;
         }
 
 

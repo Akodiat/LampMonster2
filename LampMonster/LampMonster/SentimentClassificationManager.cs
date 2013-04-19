@@ -38,34 +38,50 @@ namespace LampMonster
 
         public TruthTable[,] RunTests(IClassificationFactory classificationFactory)
         {
-            var result = new TruthTable[CategoryCount, CategoryCount];
+            var result = new TruthTable[NfoldCount][,];
+            var tasks = new Task[NfoldCount];
             for (int i = 0; i < NfoldCount; i++)
             {
-                Classify(testData[i], trainingData[i], result, classificationFactory);
+                int taskIndex = i;
+                tasks[i] = new Task(() =>
+                           {
+                               result[taskIndex] = Classify(testData[taskIndex], trainingData[taskIndex], classificationFactory);
+                           });
+                tasks[i].Start();   
             }
 
-            for (int i = 0; i < CategoryCount; i++)
+            Task.WaitAll(tasks);
+
+            var totalResult = new TruthTable[CategoryCount, CategoryCount];
+            for (int k = 0; k < NfoldCount; k++)
             {
-                for (int j = 0; j < CategoryCount; j++)
+                TruthTable[,] partialResult = result[k];
+                for (int i = 0; i < CategoryCount; i++)
                 {
-                    result[i, j] /= NfoldCount;
+                    for (int j = 0; j < CategoryCount; j++)
+                    {
+                        totalResult[i, j] += partialResult[i, j] / NfoldCount;
+                    }
                 }
             }
 
-            return result;
+            return totalResult;
         }
 
-        private void Classify(List<ClassData> testData, List<ClassData> trainingData,
-                                   TruthTable[,] result, IClassificationFactory factory)
+        private TruthTable[,] Classify(List<ClassData> testData, List<ClassData> trainingData, IClassificationFactory factory)
         {
+            var result = new TruthTable[CategoryCount, CategoryCount];
+
             for (int i = 0; i < testData.Count; i++)
             {
                 var classifyer = factory.GetClassifyer(CreateCategories(trainingData[i], testData[i]));
                 for (int j = 0; j < testData.Count; j++)
                 {
-                    result[i, j] += SentimentClassification(classifyer, testData[j]);
+                    result[i, j] = SentimentClassification(classifyer, testData[j]);
                 }
             }
+
+            return result;
         }
         
         private List<CategoryData> CreateCategories(ClassData training, ClassData test)
