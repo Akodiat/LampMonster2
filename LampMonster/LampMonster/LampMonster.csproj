@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Classifiers\AveragedPerceptron.cs" />
     <Compile Include="Classifiers\AveragedPerceptronClassifier.cs" />
+    <Compile Include="Classifiers\BinaryNaiveBayesFactory.cs" />
     <Compile Include="TestManagers\CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs" />
     <Compile Include="McNemar.cs" />
     <Compile Include="Classifiers\NaiveBayesClassifyer.cs" />
     <Compile Include="Classifiers\NaiveBayesFactory.cs" />

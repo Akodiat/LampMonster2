@@ -14,13 +14,15 @@ namespace LampMonster
             var parser = new FileParser();
             var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, (s) => true);
 
+            var trainingCoverage = 1;
+
             var testData = new List<List<ClassData>>(classesData.Count);
             var trainingData = new List<List<ClassData>>(classesData.Count);
-            var splitter = new NSplitter(5, 1.0);
+            var splitter = new NSplitter(5, trainingCoverage);
 
             splitter.NfoldSplit(testData, trainingData, classesData);
 
-            var factory = new NaiveBayesFactory(1);
+            var factory = new BinaryNaiveBayesFactory(1);
 
             var sentimentManager = new SentimentClassificationManager(factory);
             var categorizeManager = new CategorizeClassificationManager(factory);
@@ -33,7 +35,7 @@ namespace LampMonster
             var precision = CalculatePrecision(categorizationResults);
             var accuracy = CalculateAccuracy(categorizationResults);
 
-            PrintResult(classesData, domainResults, categorizationResults, mcNemarResults);
+            PrintResult(classesData, domainResults, categorizationResults, mcNemarResults, factory.ClassifyerDesc(), trainingCoverage);
         }
 
         private static Result NfoldTest<Result>(TestManager<Result> testManager,
@@ -58,12 +60,18 @@ namespace LampMonster
             return testManager.MergeTests(result);
         }
 
-        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults)
+        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults, 
+                                        string algorithm, double trainingSetCoverage)
         {
-            using (StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/stats" + DateTime.Now.ToLongDateString() + ".txt"))
+            using (StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/" +
+                  DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + ".txt"))
             {
                 file.WriteLine("Statistic Results - " + DateTime.Now + "\n");
-                file.WriteLine("SENTIMENT ANALISYS\n\n\n\n");
+                file.WriteLine("Algorithm {0} \r\nTrainingSetCoverage {1}", algorithm, trainingSetCoverage);
+                file.WriteLine();
+
+                file.WriteLine("SENTIMENT ANALISYS");
+                file.WriteLine();
 
                 for (int i = 0; i < domainResults.GetLength(0); i++)
                 {
@@ -75,11 +83,15 @@ namespace LampMonster
                        file.WriteLine("Recall: Pos " + domainResults[i, j].GetRecall()[0] + 
                                       ", Neg " + domainResults[i, j].GetRecall()[1]);
                        file.WriteLine("Precision: Pos " + domainResults[i, j].GetPercision()[0] +
-                                      " Neg " + domainResults[i, j].GetPercision()[1] + " \n\n");
+                                      " Neg " + domainResults[i, j].GetPercision()[1]);
+
+                       file.WriteLine();
                     }
                 }
 
-                file.WriteLine("CATEGORIZATION\n\n");
+                file.WriteLine("CATEGORIZATION");
+                file.WriteLine();
+                file.Write("\t\t");
 
                 for (int i = 0; i < classesData.Count; i++)
                 {
@@ -97,7 +109,9 @@ namespace LampMonster
                     }
                     file.WriteLine();
                 }
-                file.WriteLine("\nnMcNEMAR");
+
+                file.WriteLine();
+                file.WriteLine("McNEMAR");
                 file.Write("\t\t");
 
                 for (int i = 0; i < classesData.Count; i++)
@@ -108,12 +122,12 @@ namespace LampMonster
 
                 for (int i = 0; i < mcNemarResults.GetLength(0); i++)
                 {
-                    file.WriteLine(classesData[i].ClassID + "\t\t");
+                    file.Write(classesData[i].ClassID + "\t\t");
                     for (int j = 0; j < mcNemarResults.GetLength(1); j++)
                     {
                        file.Write(Math.Round(mcNemarResults[i, j], 3) + "\t");
                     }
-                    file.Write("\n");
+                    file.WriteLine();
                 }
             }
         }

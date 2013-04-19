@@ -21,7 +21,7 @@ namespace LampMonster
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Main.Start();
+           // Main.Start();
         }
         public void sendToDiagram(double[,] data, string name)
         {

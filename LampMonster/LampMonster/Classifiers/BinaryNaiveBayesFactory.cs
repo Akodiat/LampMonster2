@@ -6,45 +6,11 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    class NaiveBayes
-    {
-        public readonly string id;
-        private readonly int wordCount;
-        private readonly double categoryProb;
-        private readonly Dictionary<string, int> bagOfWords;
-
-        public NaiveBayes(string id, int vocabalarySize,
-                        double categoryProb, Dictionary<string, int> bagOfWords)
-        {
-            this.id = id;
-            this.wordCount = vocabalarySize;
-            this.categoryProb = categoryProb;
-            this.bagOfWords = bagOfWords;
-        }
-
-        public double ClassProbobility(Document document, int prior)
-        {
-            double product = 0;
-            double nom = this.wordCount + this.bagOfWords.Count * prior;
-
-            foreach (var word in document)
-            {
-                int denom;
-                this.bagOfWords.TryGetValue(word, out denom);
-                denom += prior;
-
-                product += Math.Log(denom / nom);
-            }
-
-            return product + Math.Log(this.categoryProb);
-        }
-    }
-    
-    class NaiveBayesFactory : IClassificationFactory
+    class BinaryNaiveBayesFactory : IClassificationFactory
     {
         private int prior;
 
-        public NaiveBayesFactory(int prior)
+        public BinaryNaiveBayesFactory(int prior)
         {
             this.prior = prior;
         }
@@ -66,13 +32,14 @@ namespace LampMonster
             return categories;
         }
 
+
         private static NaiveBayes CreateCategory(CategoryData categoryData)
         {
             var bag = new Dictionary<string, int>();
             int wordCount = 0;
             foreach (var document in categoryData.TrainingDocuments)
             {
-                foreach (var word in document)
+                foreach (var word in document.GetUniqueWords())
                 {
                     wordCount++;
                     if (!bag.ContainsKey(word))
@@ -84,13 +51,10 @@ namespace LampMonster
             return new NaiveBayes(categoryData.ID, wordCount, categoryData.CategoryProb, bag);
         }
 
+
         public string ClassifyerDesc()
         {
-            return string.Format("Naive Bayes Prior {0}", prior);
+            return string.Format("Binary Naive Bayes Prior {0}", prior);
         }
     }
-
- 
-
-    
 }

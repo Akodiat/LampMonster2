@@ -9,6 +9,7 @@ namespace LampMonster
     interface IClassificationFactory 
     {
         Classifyer GetClassifyer(List<CategoryData> categories);
+        string ClassifyerDesc();
     }
 
 
@@ -28,6 +29,13 @@ namespace LampMonster
         public virtual Classifyer GetClassifyer(List<CategoryData> categories)
         {
             return new PerceptronClassifier(categories, learningRate, iterations, bias);
+        }
+
+
+        public string ClassifyerDesc()
+        {
+            return string.Format("Perceptron: Iterations={0} LearningRate={1} Bias={2}",
+                                 iterations, learningRate, bias);
         }
     }
 
