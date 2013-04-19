@@ -11,20 +11,6 @@ namespace LampMonster
         Classifyer GetClassifyer(List<CategoryData> categories);
     }
 
-    class NaiveBayesFactory : IClassificationFactory
-    {
-        private int prior;
-
-        public NaiveBayesFactory(int prior)
-        {
-            this.prior = prior;
-        }
-
-        public Classifyer GetClassifyer(List<CategoryData> categories)
-        {
-            return new NaiveBayesClassifyer(categories, prior);
-        }
-    }
 
     class PerceptronFactory : IClassificationFactory
     {

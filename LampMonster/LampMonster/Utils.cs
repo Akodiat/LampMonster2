@@ -26,5 +26,27 @@ namespace LampMonster
 
             return copy;
         }
+
+        public static T[,] MergeMatricies<T>(T[][,] matricies, Func<T, T, int, T> merger)
+        {
+            int dimX = matricies[0].GetLength(0),
+                dimY = matricies[0].GetLength(1);
+
+            var totalResult = new T[dimX, dimY];
+            for (int k = 0; k < matricies.Length; k++)
+            {
+                T[,] partialResult = matricies[k];
+                for (int i = 0; i < dimX; i++)
+                {
+                    for (int j = 0; j < dimY; j++)
+                    {
+                        totalResult[i, j] = merger(totalResult[i, j],
+                                                   partialResult[i, j],
+                                                   matricies.Length);
+                    }
+                }
+            }
+            return totalResult;
+        }
     }
 }
