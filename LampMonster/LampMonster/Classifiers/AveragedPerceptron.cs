@@ -70,13 +70,13 @@ namespace LampMonster
 				
                 foreach (var word in doc)
                 {
-                    weightVector[word] += learningFactor;
+                    weightVector[word.Word] += learningFactor * word.Count;
                 }
 
                 double average_weight = (trainingSize * iterations - counter) / (trainingSize * iterations);
                 foreach (var word in doc)
                 {
-                    averageWeightVector[word] += average_weight * learningFactor;
+                    averageWeightVector[word.Word] += average_weight * learningFactor * word.Count;
                 }
             }
         }
@@ -87,8 +87,8 @@ namespace LampMonster
             foreach (var word in doc)
             {
 				double weightOfWord;
-                if (averageWeightVector.TryGetValue(word, out weightOfWord))
-                    dotProduct += weightOfWord;
+                if (averageWeightVector.TryGetValue(word.Word, out weightOfWord))
+                    dotProduct += weightOfWord * word.Count;
             }
             return dotProduct;
         }

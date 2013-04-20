@@ -12,7 +12,7 @@ namespace LampMonster
         {
             return (Math.Pow((pos_neg-neg_pos),2) / (pos_neg + neg_pos));
         }
-        public static double[,] test(TruthTable[,] truthTables)
+        public static double[,] test(SentimentTable[,] truthTables)
         {
             int numberOfCategories = (int) Math.Sqrt(truthTables.Length);
             var result = new double[numberOfCategories, numberOfCategories];

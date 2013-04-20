@@ -29,13 +29,12 @@ namespace LampMonster
 
             var domainResults = NfoldTest(sentimentManager, trainingData, testData);
             var categorizationResults = NfoldTest(categorizeManager, trainingData, testData);
-            var mcNemarResults = McNemar.test(domainResults);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
             var accuracy = CalculateAccuracy(categorizationResults);
 
-            PrintResult(classesData, domainResults, categorizationResults, mcNemarResults, factory.ClassifyerDesc(), trainingCoverage);
+            PrintResult(classesData, domainResults, categorizationResults, factory.ClassifyerDesc(), trainingCoverage);
         }
 
         private static Result NfoldTest<Result>(TestManager<Result> testManager,
@@ -60,7 +59,7 @@ namespace LampMonster
             return testManager.MergeTests(result);
         }
 
-        private static void PrintResult(List<ClassData> classesData, TruthTable[,] domainResults, double[,] categorizationResults, double[,] mcNemarResults, 
+        private static void PrintResult(List<ClassData> classesData, SentimentTable[,] domainResults, double[,] categorizationResults, 
                                         string algorithm, double trainingSetCoverage)
         {
             using (StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/" +
@@ -70,66 +69,87 @@ namespace LampMonster
                 file.WriteLine("Algorithm {0} \r\nTrainingSetCoverage {1}", algorithm, trainingSetCoverage);
                 file.WriteLine();
 
-                file.WriteLine("SENTIMENT ANALISYS");
-                file.WriteLine();
+                PrintSentimentResults(classesData, domainResults, file);
+                PrintCategorizationResults(classesData, categorizationResults, file);
+            }
+        }
 
-                for (int i = 0; i < domainResults.GetLength(0); i++)
+        private static void PrintCategorizationResults(List<ClassData> classesData, double[,] categorizationResults, StreamWriter file)
+        {
+            file.WriteLine("CATEGORIZATION\r\n");
+            file.WriteLine("\r\nTotal Accuracy: " + CalculateAccuracy(categorizationResults));
+            
+            file.Write("\t\t");
+
+
+            for (int i = 0; i < classesData.Count; i++)
+            {
+                file.Write(classesData[i].ClassID + "\t");
+            }
+
+            file.WriteLine();
+
+            for (int i = 0; i < categorizationResults.GetLength(0); i++)
+            {
+                file.Write(classesData[i].ClassID + "\t\t");
+                for (int j = 0; j < categorizationResults.GetLength(1); j++)
                 {
-                    for (int j = 0; j < domainResults.GetLength(1); j++)
-                    {
-                       file.WriteLine(classesData[i].ClassID + " train " + classesData[j].ClassID + " test");
-                       file.WriteLine(domainResults[i, j]);
-                       file.WriteLine("Accuracy " + domainResults[i, j].GetAccuracy());
-                       file.WriteLine("Recall: Pos " + domainResults[i, j].GetRecall()[0] + 
-                                      ", Neg " + domainResults[i, j].GetRecall()[1]);
-                       file.WriteLine("Precision: Pos " + domainResults[i, j].GetPercision()[0] +
-                                      " Neg " + domainResults[i, j].GetPercision()[1]);
-
-                       file.WriteLine();
-                    }
-                }
-
-                file.WriteLine("CATEGORIZATION");
-                file.WriteLine();
-                file.Write("\t\t");
-
-                for (int i = 0; i < classesData.Count; i++)
-                {
-                    file.Write(classesData[i].ClassID + "\t");
-                }
-
-                file.WriteLine();
-
-                for (int i = 0; i < categorizationResults.GetLength(0); i++)
-                {
-                    file.Write(classesData[i].ClassID + "\t\t");
-                    for (int j = 0; j < categorizationResults.GetLength(1); j++)
-                    {
-                        file.Write(categorizationResults[i, j] + "\t");
-                    }
-                    file.WriteLine();
-                }
-
-                file.WriteLine();
-                file.WriteLine("McNEMAR");
-                file.Write("\t\t");
-
-                for (int i = 0; i < classesData.Count; i++)
-                {
-                    file.Write(classesData[i].ClassID + "\t");
+                    file.Write(categorizationResults[i, j] + "\t");
                 }
                 file.WriteLine();
+            }
+            file.WriteLine();
 
-                for (int i = 0; i < mcNemarResults.GetLength(0); i++)
+            var recall = CalculateRecall(categorizationResults);
+            var precision = CalculatePrecision(categorizationResults);
+
+            for (int i = 0; i < classesData.Count; i++)
+            {
+                file.Write(classesData[i].ClassID + "\t\t");
+                file.Write(" Precision " + precision[i]);
+                file.WriteLine(" Recall " + recall[i]);
+            }
+        }
+
+        private static void PrintSentimentResults(List<ClassData> classesData, SentimentTable[,] domainResults, StreamWriter file)
+        {
+
+            file.WriteLine("SENTIMENT ANALISYS\r\n\r\n");
+
+
+            file.WriteLine("Indomain - sentiment analisys\r\n");
+            for (int i = 0; i < domainResults.GetLength(0); i++)
+            {
+                string classID = classesData[i].ClassID;
+                PrintSentiment(classID, classID, domainResults[i, i], file);
+            }
+
+            file.WriteLine("\r\nOut of domain - sentiment analysis");
+            for (int i = 0; i < domainResults.GetLength(0); i++)
+            {
+                for (int j = 0; j < domainResults.GetLength(1); j++)
                 {
-                    file.Write(classesData[i].ClassID + "\t\t");
-                    for (int j = 0; j < mcNemarResults.GetLength(1); j++)
-                    {
-                       file.Write(Math.Round(mcNemarResults[i, j], 3) + "\t");
-                    }
-                    file.WriteLine();
+                    if (i == j) continue;
+
+                    string trainID = classesData[i].ClassID;
+                    string testID = classesData[j].ClassID;
+                    PrintSentiment(trainID, testID, domainResults[i, j], file);
                 }
             }
+        }
+
+        private static void PrintSentiment(string trainId, string testID, SentimentTable sentiment, StreamWriter file)
+        {
+            file.WriteLine(trainId + " train " + testID + " test");
+            file.WriteLine(sentiment);
+            file.WriteLine("Accuracy " + sentiment.GetAccuracy());
+            file.WriteLine("Recall: Pos " + sentiment.GetRecall()[0] +
+                           ", Neg " + sentiment.GetRecall()[1]);
+            file.WriteLine("Precision: Pos " + sentiment.GetPercision()[0] +
+                           " Neg " + sentiment.GetPercision()[1]);
+            file.WriteLine("McNemar: " + sentiment.GetMcNemar());
+
+            file.WriteLine();
         }
 
         private static double CalculateAccuracy(double[,] confusionMatrix)

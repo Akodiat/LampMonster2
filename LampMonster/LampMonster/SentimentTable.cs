@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    struct TruthTable
+    struct SentimentTable
     {
         public double FalsePosetive;
         public double FalseNegative;
@@ -41,9 +41,16 @@ namespace LampMonster
             return nom / denom;
         }
 
-        public static TruthTable operator +(TruthTable lhs, TruthTable rhs)
+        public double GetMcNemar()
         {
-            TruthTable table;
+            double fp = FalsePosetive;
+            double fn = FalseNegative;
+            return ((fp - fn) * (fp - fn)) / (fp * fn);
+        }
+
+        public static SentimentTable operator +(SentimentTable lhs, SentimentTable rhs)
+        {
+            SentimentTable table;
             table.TruePosetive = lhs.TruePosetive + rhs.TruePosetive;
             table.FalsePosetive = lhs.FalsePosetive + rhs.FalsePosetive;
             table.TrueNegative = lhs.TrueNegative + rhs.TrueNegative;
@@ -52,9 +59,9 @@ namespace LampMonster
             return table;
         }
 
-        public static TruthTable operator /(TruthTable lhs, int rhs)
+        public static SentimentTable operator /(SentimentTable lhs, int rhs)
         {
-            TruthTable table;
+            SentimentTable table;
             table.TruePosetive = lhs.TruePosetive / rhs;
             table.FalsePosetive = lhs.FalsePosetive / rhs;
             table.TrueNegative = lhs.TrueNegative / rhs;

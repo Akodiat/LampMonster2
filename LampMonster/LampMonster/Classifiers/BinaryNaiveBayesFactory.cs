@@ -39,16 +39,34 @@ namespace LampMonster
             int wordCount = 0;
             foreach (var document in categoryData.TrainingDocuments)
             {
-                foreach (var word in document.GetUniqueWords())
+                foreach (var feature in document)
                 {
                     wordCount++;
-                    if (!bag.ContainsKey(word))
-                        bag[word] = 1;
+                    if (!bag.ContainsKey(feature.Word))
+                        bag[feature.Word] = 1;
                     else
-                        bag[word]++;
+                        bag[feature.Word]++;
                 }
             }
+
+
+            foreach (var item in bag.Keys.ToList())
+            {
+                if (bag[item] < 0)
+                    bag.Remove(item);
+            }
+
             return new NaiveBayes(categoryData.ID, wordCount, categoryData.CategoryProb, bag);
+        }
+
+
+        private class Comp : Comparer<KeyValuePair<string, int>>
+        {
+
+            public override int Compare(KeyValuePair<string, int> x, KeyValuePair<string, int> y)
+            {
+                return y.Value - x.Value;
+            }
         }
 
 

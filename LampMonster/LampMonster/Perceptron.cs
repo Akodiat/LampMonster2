@@ -34,6 +34,8 @@ namespace LampMonster
             this.learningRate = learningRate;
             this.bias = bias;
 
+
+
 			//Initialize the weightvector
             weightVector = new Dictionary<string, double>();
 			foreach (var word in vocabulary)
@@ -64,7 +66,7 @@ namespace LampMonster
             {
                 foreach (var word in doc)
                 {
-                    weightVector[word] += p?learningRate:-learningRate;
+                    weightVector[word.Word] += (p?learningRate:-learningRate) * word.Count;
                 }
             }
         }
@@ -75,8 +77,8 @@ namespace LampMonster
             foreach (var word in doc)
             {
 				double weightOfWord;
-                if (weightVector.TryGetValue(word, out weightOfWord))
-                    dotProduct += weightOfWord;
+                if (weightVector.TryGetValue(word.Word, out weightOfWord))
+                    dotProduct += weightOfWord * word.Count;
             }
             return dotProduct;
         }

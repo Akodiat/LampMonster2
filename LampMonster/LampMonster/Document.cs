@@ -6,24 +6,41 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    class Document : IEnumerable<string>
+    struct DocumentFeature
+    {
+        public readonly string Word;
+        public readonly int Count;
+
+        public DocumentFeature(string word, int count)
+        {
+            this.Word = word;
+            this.Count = count;
+        }
+    }
+
+
+    class Document : IEnumerable<DocumentFeature>
     {
         public readonly string ID;
-        private List<string> words;
-        private Dictionary<string, int> bagOfWords;
+        private List<DocumentFeature> words;
 
         public Document(string id,
                         List<string> words)
         {
             this.ID = id;
-            this.words = words;
-            this.bagOfWords = new Dictionary<string, int>();
+            var bag = new Dictionary<string, int>();
             foreach (var word in words)
             {
-                if (!bagOfWords.ContainsKey(word))
-                    bagOfWords.Add(word, 1);
+                if (!bag.ContainsKey(word))
+                    bag.Add(word, 1);
                 else
-                    bagOfWords[word]++;
+                    bag[word]++;
+            }
+
+            this.words = new List<DocumentFeature>(bag.Count);
+            foreach (var item in bag)
+            {
+                this.words.Add(new DocumentFeature(item.Key, item.Value));
             }
         }
 
@@ -32,12 +49,7 @@ namespace LampMonster
             get { return this.words.Count; }
         }
 
-        public IEnumerable<string> GetUniqueWords()
-        {
-            return bagOfWords.Keys;
-        }
-        
-        public IEnumerator<string> GetEnumerator()
+        public IEnumerator<DocumentFeature> GetEnumerator()
         {
             return words.GetEnumerator();
         }

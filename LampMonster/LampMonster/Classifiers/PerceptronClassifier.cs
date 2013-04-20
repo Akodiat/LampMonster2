@@ -22,7 +22,7 @@ namespace LampMonster
                 {
                     foreach (var word in doc)
                     {
-                        vocabulary.Add(word);
+                        vocabulary.Add(word.Word);
                     }
                 }
             }

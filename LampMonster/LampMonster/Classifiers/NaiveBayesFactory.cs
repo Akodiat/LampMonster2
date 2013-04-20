@@ -30,10 +30,10 @@ namespace LampMonster
             foreach (var word in document)
             {
                 int denom;
-                this.bagOfWords.TryGetValue(word, out denom);
+                this.bagOfWords.TryGetValue(word.Word, out denom);
                 denom += prior;
 
-                product += Math.Log(denom / nom);
+                product += Math.Log(denom / nom) * word.Count;
             }
 
             return product + Math.Log(this.categoryProb);
@@ -75,14 +75,17 @@ namespace LampMonster
                 foreach (var word in document)
                 {
                     wordCount++;
-                    if (!bag.ContainsKey(word))
-                        bag[word] = 1;
+                    if (!bag.ContainsKey(word.Word))
+                        bag[word.Word] = word.Count;
                     else
-                        bag[word]++;
+                        bag[word.Word] += word.Count;
                 }
             }
+
+
             return new NaiveBayes(categoryData.ID, wordCount, categoryData.CategoryProb, bag);
         }
+
 
         public string ClassifyerDesc()
         {

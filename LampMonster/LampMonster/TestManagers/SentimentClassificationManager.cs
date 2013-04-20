@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    class SentimentClassificationManager : TestManager<TruthTable[,]>
+    class SentimentClassificationManager : TestManager<SentimentTable[,]>
     {
         private IClassificationFactory factory;
 
@@ -15,10 +15,10 @@ namespace LampMonster
         {
             this.factory = factory;
         }
-        public TruthTable[,] RunPartialTests(List<ClassData> trainingData, List<ClassData> testData)
+        public SentimentTable[,] RunPartialTests(List<ClassData> trainingData, List<ClassData> testData)
         {
             int categoryCount = testData.Count;
-            var result = new TruthTable[categoryCount, categoryCount];
+            var result = new SentimentTable[categoryCount, categoryCount];
 
             for (int i = 0; i < categoryCount; i++)
             {
@@ -32,7 +32,7 @@ namespace LampMonster
             return result;
         }
 
-        public TruthTable[,] MergeTests(TruthTable[][,] testResults)
+        public SentimentTable[,] MergeTests(SentimentTable[][,] testResults)
         {
             return Utils.MergeMatricies(testResults,
                    (first, second, size) => first + (second / size));
@@ -52,9 +52,9 @@ namespace LampMonster
             return list;
         }
 
-        private TruthTable SentimentClassification(Classifyer classifyer, ClassData testData)
+        private SentimentTable SentimentClassification(Classifyer classifyer, ClassData testData)
         {
-            var table = new TruthTable();
+            var table = new SentimentTable();
 
             int posCount = RunTests(classifyer, testData.PosetiveDocuments, "pos");
             int negCount = RunTests(classifyer, testData.NegativeDocuments, "neg");
