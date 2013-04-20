@@ -25,7 +25,7 @@ namespace LampMonster
         {
             get { return bias; }
         }
-        public AveragedPerceptron(string category, List<Document> docsOfCategory, List<Document> docsNotOfCat,
+        public AveragedPerceptron(string category, List<Dictionary<string, int>> docsOfCategory, List<Dictionary<string, int>> docsNotOfCat,
 							 double learningRate, int iterations, double bias, ISet<string> vocabulary)
         {
             if (learningRate <= 0 || learningRate >= 1)
@@ -61,34 +61,34 @@ namespace LampMonster
 
         }
 
-        private void Learn(bool p, Document doc, int counter, int iterations, int trainingSize)
+        private void Learn(bool p, Dictionary<string, int> doc, int counter, int iterations, int trainingSize)
         {
 			bool guess = Classify(doc)>=0;
 			double learningFactor = p ? learningRate : -learningRate;
             if (p ^ guess) // if p and Classify don't agree on the category
             {
 				
-                foreach (var word in doc)
+                foreach (var word in doc.Keys)
                 {
-                    weightVector[word] += learningFactor;
+                    weightVector[word] += learningFactor*doc[word];
                 }
 
                 double average_weight = (trainingSize * iterations - counter) / (trainingSize * iterations);
-                foreach (var word in doc)
+                foreach (var word in doc.Keys)
                 {
-                    averageWeightVector[word] += average_weight * learningFactor;
+                    averageWeightVector[word] += average_weight * learningFactor*doc[word];
                 }
             }
         }
 
-        public double Classify(Document doc)
+        public double Classify(Dictionary<string, int> doc)
         {
             double dotProduct = bias;
-            foreach (var word in doc)
+            foreach (var word in doc.Keys)
             {
 				double weightOfWord;
                 if (averageWeightVector.TryGetValue(word, out weightOfWord))
-                    dotProduct += weightOfWord;
+                    dotProduct += weightOfWord * doc[word] ;
             }
             return dotProduct;
         }

@@ -11,37 +11,51 @@ namespace LampMonster
     {
         List<Perceptron> perceptrons;
 
-        public PerceptronClassifier(List<CategoryData> trainingDocs, 
+        public PerceptronClassifier(List<CategoryData> categoryData, 
 										double learningRate, int iterations, double bias)
         {
-			//Construct vocabulary
-			ISet<string> vocabulary = new HashSet<string>();
-            foreach (var category in trainingDocs)
+			
+			this.perceptrons = new List<Perceptron>();
+
+			//Build the megadoc
+            var categoryToBags = new Dictionary<string, List<Dictionary<string, int>>>();
+            foreach (var category in categoryData)
             {
-                foreach (var doc in category.TrainingDocuments)
+                categoryToBags.Add(
+                    category.ID,
+                    BagBuilder.BuildBagsFromDocuments(category.TrainingDocuments)
+                    );
+            }
+
+			//Construct the vocabulary
+            var vocabulary = new HashSet<string>();
+            foreach (var documentType in categoryToBags.Values)
+            {
+                foreach (var document in documentType)
                 {
-                    foreach (var word in doc)
+                    foreach (var word in document.Keys)
                     {
                         vocabulary.Add(word);
                     }
                 }
             }
-			
-			this.perceptrons = new List<Perceptron>();
-
-			foreach(var cat in trainingDocs)
+      
+			foreach(var category in categoryData)
 			{
-				List<Document> docsNotInCategory = new List<Document>();
-				foreach (var cat2 in trainingDocs)
-				{
-						if(cat2.ID != cat.ID)
-							docsNotInCategory.AddRange(cat2.TrainingDocuments);
-				}
+                var docsOfCategory = new List<Dictionary<string, int>>(categoryToBags[category.ID]);
+
+                var docsNotOfCategory = new List<Dictionary<string, int>>();
+                foreach (var cat in categoryToBags.Keys)
+                {
+                    if (cat != category.ID)
+                        docsNotOfCategory.AddRange(categoryToBags[cat]);
+                }
+
 				this.perceptrons.Add(
                     new Perceptron(
-						cat.ID,
-						cat.TrainingDocuments,
-						docsNotInCategory,
+						category.ID,
+						docsOfCategory,
+						docsNotOfCategory,
 						learningRate,
 						iterations,
 						bias,
@@ -51,22 +65,19 @@ namespace LampMonster
         }
         public string Classify(Document document)
         {
+            Dictionary<string, int> docBag = BagBuilder.BuildBagFromDocument(document);
             string category = "failure";
             double highest = double.NegativeInfinity;
             foreach (var perceptron in perceptrons)
             {
-				double perceptronOutput = perceptron.Classify(document);
+				double perceptronOutput = perceptron.Classify(docBag);
                 if (perceptronOutput > highest)
                 {
                     highest = perceptronOutput;
                     category = perceptron.Category;
                 }
             }
-            //Console.WriteLine("Couldn't classify document times: " + ++fails);
-            if (category == "failure")
-                throw new ArgumentException("WTF");
             return category;
-            //throw new ArgumentOutOfRangeException("Document was not able to be classified");
         }
     }
 }

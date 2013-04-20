@@ -24,7 +24,7 @@ namespace LampMonster
         {
             get { return bias; }
         }
-        public Perceptron(string category, List<Document> docsOfCategory, List<Document> docsNotOfCat,
+        public Perceptron(string category, List<Dictionary<string, int>> docsOfCategory, List<Dictionary<string, int>> docsNotOfCat,
 							 double learningRate, int iterations, double bias, ISet<string> vocabulary)
         {
             if (learningRate <= 0 || learningRate >= 1)
@@ -53,30 +53,30 @@ namespace LampMonster
                     this.Learn(false, doc);
                 }
             }
-            List<KeyValuePair<string, double>> weightList = weightVector.ToList();
-            weightList.Sort((firstPair, nextPair) => { return firstPair.Value.CompareTo(nextPair.Value); });
-
         }
 
-        private void Learn(bool p, Document doc)
+
+
+        private void Learn(bool p, Dictionary<string, int> docBag)
         {
-            if (p ^ (Classify(doc)>=0)) // if p and Classify don't agree on the category
+            if (p != (Classify(docBag) >= 0)) // if p and Classify don't agree on the category
             {
-                foreach (var word in doc)
+				double learningFactor = p?learningRate:-learningRate;
+                foreach (var keyValPair in docBag)
                 {
-                    weightVector[word] += p?learningRate:-learningRate;
+                    weightVector[keyValPair.Key] += learningFactor * keyValPair.Value;
                 }
             }
         }
 
-        public double Classify(Document doc)
+        public double Classify(Dictionary<string, int> bagOfDoc)
         {
             double dotProduct = bias;
-            foreach (var word in doc)
+            foreach (var keyValPair in bagOfDoc)
             {
 				double weightOfWord;
-                if (weightVector.TryGetValue(word, out weightOfWord))
-                    dotProduct += weightOfWord;
+                if (weightVector.TryGetValue(keyValPair.Key, out weightOfWord))
+                    dotProduct += weightOfWord * keyValPair.Value;
             }
             return dotProduct;
         }

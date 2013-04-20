@@ -58,6 +58,10 @@
     <Compile Include="Classifiers\AveragedPerceptronClassifier.cs" />
     <Compile Include="Classifiers\BinaryNaiveBayesFactory.cs" />
     <Compile Include="TestManagers\CategorizeClassificationManager.cs" />
+    <Compile Include="AveragedPerceptron.cs" />
+    <Compile Include="AveragedPerceptronClassifier.cs" />
+    <Compile Include="BagBuilder.cs" />
+    <Compile Include="CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />
     <Compile Include="Classifiers\ClassificationFactory.cs" />
