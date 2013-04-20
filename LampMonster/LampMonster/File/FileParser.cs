@@ -17,18 +17,10 @@ namespace LampMonster
                 words = fileString.Split('.', ' ', ',', '\n', '\r', '"', '(', ')');
             }
 
-
-
-            string[] stopWords = { "it", "is", "and", "or", "this", "can", "be", "you", "i" }; //Think about this.
-
             var list = new List<string>(words.Length);
             foreach (var word in words)
             {
-                if(IsUpper(word)) {
-                    list.Add(word);
-                }
-
-                if (word != "" && word != "," && !stopWords.Contains(word) &&  wordFilter(word))
+                if (word != "" && word != ","&&  wordFilter(word))
                     list.Add(word.ToLower());
             }
 

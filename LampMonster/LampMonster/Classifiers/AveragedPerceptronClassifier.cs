@@ -29,8 +29,6 @@ namespace LampMonster
             }
 
 
-            
-
             this.perceptrons = new List<AveragedPerceptron>();
 
             foreach (var cat in trainingDocs)

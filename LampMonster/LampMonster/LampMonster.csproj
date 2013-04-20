@@ -75,7 +75,7 @@
     <Compile Include="Classifiers\NaiveBayesClassifyer.cs" />
     <Compile Include="Classifiers\NaiveBayesFactory.cs" />
     <Compile Include="NSplitter.cs" />
-    <Compile Include="Perceptron.cs" />
+    <Compile Include="Classifiers\Perceptron.cs" />
     <Compile Include="Classifiers\PerceptronClassifier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -72,9 +72,9 @@ namespace LampMonster
             int wordCount = 0;
             foreach (var document in categoryData.TrainingDocuments)
             {
+                wordCount += document.WordCount;
                 foreach (var word in document)
                 {
-                    wordCount++;
                     if (!bag.ContainsKey(word.Word))
                         bag[word.Word] = word.Count;
                     else

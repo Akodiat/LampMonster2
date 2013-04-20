@@ -50,12 +50,6 @@ namespace LampMonster
             }
 
 
-            foreach (var item in bag.Keys.ToList())
-            {
-                if (bag[item] < 0)
-                    bag.Remove(item);
-            }
-
             return new NaiveBayes(categoryData.ID, wordCount, categoryData.CategoryProb, bag);
         }
 
