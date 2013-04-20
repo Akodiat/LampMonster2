@@ -22,7 +22,7 @@ namespace LampMonster
 
             splitter.NfoldSplit(testData, trainingData, classesData);
 
-            var factory = new BinaryNaiveBayesFactory(1);
+            var factory = new PerceptronFactory(300, 0.4f, 0);
 
             var sentimentManager = new SentimentClassificationManager(factory);
             var categorizeManager = new CategorizeClassificationManager(factory);

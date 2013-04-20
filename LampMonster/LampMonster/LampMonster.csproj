@@ -62,6 +62,7 @@
     <Compile Include="AveragedPerceptronClassifier.cs" />
     <Compile Include="BagBuilder.cs" />
     <Compile Include="CategorizeClassificationManager.cs" />
+    <Compile Include="BagBuilder.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />
     <Compile Include="Classifiers\ClassificationFactory.cs" />
