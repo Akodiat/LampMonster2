@@ -9,69 +9,77 @@ namespace LampMonster
 
     class AveragedPerceptronClassifier : Classifyer
     {
-        static int positivesMinusNegatives = 0;
+        int positivesMinusNegatives = 0;
         List<AveragedPerceptron> perceptrons;
 
-        public AveragedPerceptronClassifier(List<CategoryData> trainingDocs,
+        public AveragedPerceptronClassifier(List<CategoryData> categoryData,
                                         double learningRate, int iterations, double bias)
         {
-            //Construct vocabulary
-            ISet<string> vocabulary = new HashSet<string>();
-            foreach (var category in trainingDocs)
+           /* this.perceptrons = new List<AveragedPerceptron>();
+
+            //Build the megadoc
+            var categoryToBags = new Dictionary<string, List<Dictionary<string, int>>>();
+            foreach (var category in categoryData)
             {
-                foreach (var doc in category.TrainingDocuments)
+                categoryToBags.Add(
+                    category.ID,
+                    BagBuilder.BuildBagsFromDocuments(category.TrainingDocuments)
+                    );
+            }
+
+            //Construct the vocabulary
+            var vocabulary = new HashSet<string>();
+            foreach (var documentType in categoryToBags.Values)
+            {
+                foreach (var document in documentType)
                 {
-                    foreach (var word in doc)
+                    foreach (var word in document.Keys)
                     {
                         vocabulary.Add(word.Word);
                     }
                 }
             }
 
-
-            this.perceptrons = new List<AveragedPerceptron>();
-
-            foreach (var cat in trainingDocs)
+            foreach (var category in categoryData)
             {
-                List<Document> docsNotInCategory = new List<Document>();
-                foreach (var cat2 in trainingDocs)
+                var docsOfCategory = new List<Dictionary<string, int>>(categoryToBags[category.ID]);
+
+                var docsNotOfCategory = new List<Dictionary<string, int>>();
+                foreach (var cat in categoryToBags.Keys)
                 {
-                    if (cat2.ID != cat.ID)
-                        docsNotInCategory.AddRange(cat2.TrainingDocuments);
+                    if (cat != category.ID)
+                        docsNotOfCategory.AddRange(categoryToBags[cat]);
                 }
+
                 this.perceptrons.Add(
                     new AveragedPerceptron(
-                        cat.ID,
-                        cat.TrainingDocuments,
-                        docsNotInCategory,
+                        category.ID,
+                        docsOfCategory,
+                        docsNotOfCategory,
                         learningRate,
                         iterations,
                         bias,
                         vocabulary));
-            }
-
+            }*/
         }
         public string Classify(Document document)
         {
+            throw new NotImplementedException();
+            /*
+
+            Dictionary<string, int> docBag = BagBuilder.BuildBagFromDocument(document);
             string category = "failure";
             double highest = double.NegativeInfinity;
             foreach (var perceptron in perceptrons)
             {
-                double perceptronOutput = perceptron.Classify(document);
+                double perceptronOutput = perceptron.Classify(docBag);
                 if (perceptronOutput > highest)
                 {
                     highest = perceptronOutput;
                     category = perceptron.Category;
                 }
             }
-            if (category == "failure")
-                throw new ArgumentException("WTF");
-            if (category == "pos")
-                positivesMinusNegatives++;
-			else if (category == "neg")
-				positivesMinusNegatives--;
-            Console.WriteLine(positivesMinusNegatives);
-            return category;
+            return category; */
         }
     }
 }

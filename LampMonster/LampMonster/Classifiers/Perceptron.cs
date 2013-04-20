@@ -33,10 +33,8 @@ namespace LampMonster
             this.category = category;
             this.learningRate = learningRate;
             this.bias = bias;
-
-
-
-			//Initialize the weightvector
+			
+            //Initialize the weightvector
             weightVector = new Dictionary<string, double>();
 			foreach (var word in vocabulary)
             {
@@ -55,30 +53,29 @@ namespace LampMonster
                     this.Learn(false, doc);
                 }
             }
-            List<KeyValuePair<string, double>> weightList = weightVector.ToList();
-            weightList.Sort((firstPair, nextPair) => { return firstPair.Value.CompareTo(nextPair.Value); });
-
         }
 
-        private void Learn(bool p, Document doc)
+        private void Learn(bool p, Document document)
         {
-            if (p ^ (Classify(doc)>=0)) // if p and Classify don't agree on the category
+            if (p != (Classify(document) >= 0)) // if p and Classify don't agree on the category
             {
-                foreach (var word in doc)
+				double learningFactor = p?learningRate:-learningRate;
+                foreach (var feature in document)
                 {
-                    weightVector[word.Word] += (p?learningRate:-learningRate) * word.Count;
+                    if(weightVector.ContainsKey(feature.Word))
+                         weightVector[feature.Word] += learningFactor * feature.Frequency;
                 }
             }
         }
 
-        public double Classify(Document doc)
+        public double Classify(Document document)
         {
             double dotProduct = bias;
-            foreach (var word in doc)
+            foreach (var feature in document)
             {
 				double weightOfWord;
-                if (weightVector.TryGetValue(word.Word, out weightOfWord))
-                    dotProduct += weightOfWord * word.Count;
+                if (weightVector.TryGetValue(feature.Word, out weightOfWord))
+                    dotProduct += weightOfWord * feature.Frequency;
             }
             return dotProduct;
         }

@@ -10,11 +10,13 @@ namespace LampMonster
     {
         public readonly string Word;
         public readonly int Count;
+        public readonly double Frequency;
 
-        public DocumentFeature(string word, int count)
+        public DocumentFeature(string word, int count, double frequency)
         {
             this.Word = word;
             this.Count = count;
+            this.Frequency = frequency;
         }
     }
 
@@ -46,7 +48,7 @@ namespace LampMonster
             this.words = new List<DocumentFeature>(bag.Count);
             foreach (var item in bag)
             {
-                this.words.Add(new DocumentFeature(item.Key, item.Value));
+                this.words.Add(new DocumentFeature(item.Key, item.Value, (double)item.Value / wordCount));
             }
         }
 

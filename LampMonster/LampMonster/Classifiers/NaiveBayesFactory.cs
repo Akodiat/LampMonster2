@@ -33,7 +33,7 @@ namespace LampMonster
                 this.bagOfWords.TryGetValue(word.Word, out denom);
                 denom += prior;
 
-                product += Math.Log(denom / nom) * word.Count;
+                product += Math.Log(denom / nom);
             }
 
             return product + Math.Log(this.categoryProb);

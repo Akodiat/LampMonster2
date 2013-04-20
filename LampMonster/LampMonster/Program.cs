@@ -9,10 +9,20 @@ namespace LampMonster
 {
     static class Program
     {
+
+        static string[] words = { "of", "and", "then", "the", "thing", "is", "that", "there" };
+
+        private static bool Filter(string s)
+        {
+            double dummy;
+            return  words.Contains(s);
+        }
+
+
         static void Main()
         {
             var parser = new FileParser();
-            var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, (s) => true);
+            var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, Filter);
 
             var trainingCoverage = 1;
 
@@ -22,7 +32,7 @@ namespace LampMonster
 
             splitter.NfoldSplit(testData, trainingData, classesData);
 
-            var factory = new AveragedPerceptronFactory(300, 0.04, 1f);
+            var factory = new PerceptronFactory(1000, 0.015, -0.001);
 
             var sentimentManager = new SentimentClassificationManager(factory);
             var categorizeManager = new CategorizeClassificationManager(factory);

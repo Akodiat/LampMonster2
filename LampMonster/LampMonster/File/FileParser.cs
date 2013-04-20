@@ -20,7 +20,7 @@ namespace LampMonster
             var list = new List<string>(words.Length);
             foreach (var word in words)
             {
-                if (word != "" && word != ","&&  wordFilter(word))
+                if (word != "" && word != "," &&  !wordFilter(word))
                     list.Add(word.ToLower());
             }
 
