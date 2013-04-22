@@ -38,7 +38,7 @@ namespace LampMonster
             var perceptrons = new List<PerceptronBase>();
             foreach (var category in categories)
             {
-                var list = ExctractVocabulary(category);
+                var list = ExctractVocabulary(category, categories);
 
                 var docsNotOfCategory = new List<Document>();
                 foreach (var cat in categories)
@@ -74,7 +74,7 @@ namespace LampMonster
                                     list);
         }
 
-        private List<string> ExctractVocabulary(CategoryData category)
+        private List<string> ExctractVocabulary(CategoryData category, List<CategoryData> categories)
         {
             var bag = new Dictionary<string, double>();
             foreach (var document in category.TrainingDocuments)
@@ -87,6 +87,32 @@ namespace LampMonster
                         bag[feture.Word] += feture.Frequency;
                 }
             }
+
+
+            var bag2 = new Dictionary<string, double>();
+            foreach (var cat in categories)
+            {
+                if (cat == category) continue;
+
+                foreach (var document in cat.TrainingDocuments)
+                {
+                    foreach (var feture in document)
+                    {
+                        if (!bag.ContainsKey(feture.Word))
+                            bag.Add(feture.Word, feture.Frequency);
+                        else
+                            bag[feture.Word] += feture.Frequency;
+                    }
+                }
+            }
+
+            foreach (var feture in bag2)
+            {
+                if (bag.ContainsKey(feture.Key))
+                    bag[feture.Key] -= feture.Value;
+            }
+
+
 
             var list = new List<string>(bag.Keys);
             list.Sort((x, y) =>

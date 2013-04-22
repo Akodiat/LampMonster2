@@ -16,28 +16,29 @@ namespace LampMonster
 
         protected override void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate)
         {
+            int trainingCount = docsOfCategory.Count + docsNotOfCat.Count;
             for (int i = 0; i < iterations; i++)
             {
                 //Learn from training data
                 foreach (var doc in docsOfCategory)
                 {
-                    this.LearnDocument(true, doc, learningRate);
+                    this.LearnDocument(true, doc, learningRate, trainingCount);
                 }
                 foreach (var doc in docsNotOfCat)
                 {
-                    this.LearnDocument(false, doc, learningRate);
+                    this.LearnDocument(false, doc, learningRate, trainingCount);
                 }
             }
         }
     
-        private void LearnDocument(bool p, Document document, double learningRate)
+        private void LearnDocument(bool p, Document document, double learningRate, int trainingCount)
         {
             if (p != (Classify(document) >= 0)) // if p and Classify don't agree on the category
             {
 				double learningFactor = p?learningRate:-learningRate;
                 foreach (var feature in document)
                 {
-                    weightVector[feature.Word] += learningFactor * feature.Frequency;
+                    weightVector[feature.Word] += learningFactor * Math.Log(trainingCount / feature.Frequency);
                 }
             }
         }

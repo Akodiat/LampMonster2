@@ -10,10 +10,12 @@ namespace LampMonster
     class SentimentClassificationManager : TestManager<SentimentTable[,]>
     {
         private IClassificationFactory factory;
+        private FailLog log;
 
-        public SentimentClassificationManager(IClassificationFactory factory)
+        public SentimentClassificationManager(IClassificationFactory factory, FailLog log)
         {
             this.factory = factory;
+            this.log = log;
         }
         public SentimentTable[,] RunPartialTests(List<ClassData> trainingData, List<ClassData> testData)
         {
@@ -75,6 +77,8 @@ namespace LampMonster
                 var c = classifyer.Classify(doc);
                 if (c == correctClass)
                     correctCount++;
+                else
+                    log.LogClassificationFailure(doc);
             }
             return correctCount;
         }

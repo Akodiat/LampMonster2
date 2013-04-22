@@ -59,6 +59,7 @@
     <Compile Include="Classifiers\PerceptronBase.cs" />
     <Compile Include="Classifiers\PerceptronFactory.cs" />
     <Compile Include="Classifiers\VeightVector.cs" />
+    <Compile Include="FailLog.cs" />
     <Compile Include="TestManagers\CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />

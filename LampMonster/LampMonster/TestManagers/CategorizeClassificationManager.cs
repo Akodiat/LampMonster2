@@ -51,6 +51,7 @@ namespace LampMonster
                 foreach (var document in testData[i].JoinedDocuments)
                 {
                     string category = classifyer.Classify(document);
+
                     int index = indexMap[category];
                     result[i, index]++;
                 }

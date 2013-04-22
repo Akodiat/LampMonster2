@@ -11,17 +11,16 @@ namespace LampMonster
     {
         static void Main()
         {
-            var parser = new FileParser("stopwords.txt", '.', ' ', ',', '\n', '\r', '"', '(', ')');
+            var parser = new FileParser("stopwords.txt", '.', ' ', ',', '\n', '\r', '"', '(', ')','[', ']', '$', '!');
             var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser);
 
             var trainingCoverage = 1;
-
+            var failLog = new FailLog();
             var validator = new CrossValidation(10, trainingCoverage, classesData);
 
-            var factory = new PerceptronFactory(10000, 100, 0.08, 0, PerceptronType.Normal);
-            //var factory = new BinaryNaiveBayesFactory(1);
+            var factory = new PerceptronFactory(4000, 100, 0.1, 0, PerceptronType.Normal);
 
-            var sentimentManager = new SentimentClassificationManager(factory);
+            var sentimentManager = new SentimentClassificationManager(factory, failLog);
             var categorizeManager = new CategorizeClassificationManager(factory);
 
             var domainResults = validator.Compute(sentimentManager);
@@ -31,12 +30,13 @@ namespace LampMonster
             var precision = CalculatePrecision(categorizationResults);
             var accuracy = CalculateAccuracy(categorizationResults);
 
-            PrintResult(classesData, domainResults, categorizationResults, factory.ClassifyerDesc(), trainingCoverage);
+            PrintResult(classesData, domainResults, categorizationResults, factory.ClassifyerDesc(), trainingCoverage, failLog);
+
         }
 
         
         private static void PrintResult(List<ClassData> classesData, SentimentTable[,] domainResults, double[,] categorizationResults, 
-                                        string algorithm, double trainingSetCoverage)
+                                        string algorithm, double trainingSetCoverage, FailLog failLog)
         {
             using (StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/" +
                   DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + ".txt"))
@@ -47,6 +47,7 @@ namespace LampMonster
 
                 PrintSentimentResults(classesData, domainResults, file);
                 PrintCategorizationResults(classesData, categorizationResults, file);
+                failLog.PrintWorst(1000, file);
             }
         }
 
