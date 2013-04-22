@@ -14,13 +14,21 @@ namespace LampMonster
 
         private static bool Filter(string s)
         {
-            double dummy;
             return  words.Contains(s);
         }
 
-
         static void Main()
         {
+            var l = new List<string>();
+            using (StreamReader reader = new StreamReader("stopwords.txt"))
+            {
+                while(!reader.EndOfStream)
+                    l.Add(reader.ReadLine());
+            }
+
+            words = l.ToArray();
+
+
             var parser = new FileParser();
             var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, Filter);
 
@@ -28,11 +36,12 @@ namespace LampMonster
 
             var testData = new List<List<ClassData>>(classesData.Count);
             var trainingData = new List<List<ClassData>>(classesData.Count);
-            var splitter = new NSplitter(5, trainingCoverage);
+            var splitter = new NSplitter(10, trainingCoverage);
 
             splitter.NfoldSplit(testData, trainingData, classesData);
 
-            var factory = new PerceptronFactory(1000, 0.015, -0.001);
+            var factory = new PerceptronFactory(6000, 100, 0.1, 0);
+            //var factory = new BinaryNaiveBayesFactory(1);
 
             var sentimentManager = new SentimentClassificationManager(factory);
             var categorizeManager = new CategorizeClassificationManager(factory);

@@ -25,7 +25,7 @@ namespace LampMonster
             get { return bias; }
         }
         public Perceptron(string category, List<Document> docsOfCategory, List<Document> docsNotOfCat,
-							 double learningRate, int iterations, double bias, ISet<string> vocabulary)
+							 double learningRate, int iterations, double bias, List<KeyValuePair<string,double>> vocabulary)
         {
             if (learningRate <= 0 || learningRate >= 1)
                 throw new ArgumentOutOfRangeException("0 < learningRate < 1 must be satisfied");
@@ -38,7 +38,7 @@ namespace LampMonster
             weightVector = new Dictionary<string, double>();
 			foreach (var word in vocabulary)
             {
-				weightVector.Add(word, 0);
+				weightVector.Add(word.Key, 0);
             }
 
             for (int i = 0; i < iterations; i++)

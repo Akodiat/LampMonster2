@@ -20,7 +20,6 @@ namespace LampMonster
         }
     }
 
-
     class Document : IEnumerable<DocumentFeature>
     {
         public readonly string ID;
