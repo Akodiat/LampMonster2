@@ -9,28 +9,10 @@ namespace LampMonster
 {
     static class Program
     {
-
-        static string[] words = { "of", "and", "then", "the", "thing", "is", "that", "there" };
-
-        private static bool Filter(string s)
-        {
-            return  words.Contains(s);
-        }
-
         static void Main()
         {
-            var l = new List<string>();
-            using (StreamReader reader = new StreamReader("stopwords.txt"))
-            {
-                while(!reader.EndOfStream)
-                    l.Add(reader.ReadLine());
-            }
-
-            words = l.ToArray();
-
-
-            var parser = new FileParser();
-            var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser, Filter);
+            var parser = new FileParser("stopwords.txt", '.', ' ', ',', '\n', '\r', '"', '(', ')');
+            var classesData = FileManager.ExctractClassData("../../../../Documents/amazon-balanced-6cats", parser);
 
             var trainingCoverage = 1;
 

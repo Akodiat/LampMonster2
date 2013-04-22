@@ -11,8 +11,7 @@ namespace LampMonster
     {
 
         public static List<ClassData> ExctractClassData(string root,
-                                                        FileParser parser,
-                                                        Predicate<string> wordfilter)
+                                                        FileParser parser)
         {
             var classData = new List<ClassData>();
 
@@ -23,24 +22,23 @@ namespace LampMonster
                 var posFiles = Directory.GetFiles(Path.Combine(subdir, "pos"));
                 var negFiles = Directory.GetFiles(Path.Combine(subdir, "neg"));
 
-                classData.Add(CreateClassData(category, posFiles, negFiles, parser, wordfilter));
+                classData.Add(CreateClassData(category, posFiles, negFiles, parser));
             }
 
             return classData;            
         }
 
         private static ClassData CreateClassData(string category, string[] posFiles, 
-                                                 string[] negFiles, FileParser parser,
-                                                 Predicate<string> wordFilter)
+                                                 string[] negFiles, FileParser parser)
         {
             var posDoc = new List<Document>();
             var negDoc = new List<Document>();
 
             foreach (var file in posFiles)
-                posDoc.Add(new Document(file, parser.GetWordsInFile(file, wordFilter)));
+                posDoc.Add(new Document(file, parser.GetWordsInFile(file)));
 
             foreach (var file in negFiles)
-                negDoc.Add(new Document(file, parser.GetWordsInFile(file, wordFilter)));
+                negDoc.Add(new Document(file, parser.GetWordsInFile(file)));
            
             return new ClassData(category, posDoc, negDoc);
         }
