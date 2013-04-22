@@ -9,68 +9,12 @@ namespace LampMonster
 	
     class PerceptronClassifier : Classifyer
     {
-        List<Perceptron> perceptrons;
+        List<PerceptronBase> perceptrons;
 
-        public PerceptronClassifier(int fetureCount, List<CategoryData> categoryData, 
-										double learningRate, int iterations, double bias)
+        public PerceptronClassifier(List<PerceptronBase> perceptrons)
         {
-			
-			this.perceptrons = new List<Perceptron>();
-                  
-			foreach(var category in categoryData)
-			{
-                var bag = new Dictionary<string, double>();
-                foreach (var document in category.TrainingDocuments)
-                {
-                    foreach (var feture in document)
-                    {
-                        if (!bag.ContainsKey(feture.Word))
-                            bag.Add(feture.Word, feture.Frequency);
-                        else
-                            bag[feture.Word] += feture.Frequency;
-                    }
-                }
-
-                var list = new List<KeyValuePair<string,double>>(bag);
-                list.Sort(new ValueComp());
-
-                for (int i = list.Count - 1; i >= fetureCount; i--)
-                {
-                    list.RemoveAt(i);
-                }
-
-                var docsNotOfCategory = new List<Document>();
-                foreach (var cat in categoryData)
-                {
-                    if (cat.ID != category.ID)
-                        docsNotOfCategory.AddRange(cat.TrainingDocuments);
-                }
-
-				this.perceptrons.Add(
-                    new Perceptron(
-						category.ID,
-						category.TrainingDocuments,
-						docsNotOfCategory,
-						learningRate,
-						iterations,
-						bias,
-                        list));
-            }
+            this.perceptrons = perceptrons;
         }
-
-        private class ValueComp : IComparer<KeyValuePair<string, double>>
-        {
-            public int Compare(KeyValuePair<string, double> x, KeyValuePair<string, double> y)
-            {
-                if (x.Value > y.Value)
-                    return -1;
-                else if (x.Value == y.Value)
-                    return 0;
-                else
-                    return 1;
-            }
-        }
-
 
 
         public string Classify(Document document)

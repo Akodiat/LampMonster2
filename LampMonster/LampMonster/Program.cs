@@ -16,20 +16,16 @@ namespace LampMonster
 
             var trainingCoverage = 1;
 
-            var testData = new List<List<ClassData>>(classesData.Count);
-            var trainingData = new List<List<ClassData>>(classesData.Count);
-            var splitter = new NSplitter(10, trainingCoverage);
+            var validator = new CrossValidation(10, trainingCoverage, classesData);
 
-            splitter.NfoldSplit(testData, trainingData, classesData);
-
-            var factory = new PerceptronFactory(6000, 100, 0.1, 0);
+            var factory = new PerceptronFactory(10000, 100, 0.08, 0, PerceptronType.Normal);
             //var factory = new BinaryNaiveBayesFactory(1);
 
             var sentimentManager = new SentimentClassificationManager(factory);
             var categorizeManager = new CategorizeClassificationManager(factory);
 
-            var domainResults = NfoldTest(sentimentManager, trainingData, testData);
-            var categorizationResults = NfoldTest(categorizeManager, trainingData, testData);
+            var domainResults = validator.Compute(sentimentManager);
+            var categorizationResults = validator.Compute(categorizeManager);
 
             var recall = CalculateRecall(categorizationResults);
             var precision = CalculatePrecision(categorizationResults);
@@ -38,28 +34,7 @@ namespace LampMonster
             PrintResult(classesData, domainResults, categorizationResults, factory.ClassifyerDesc(), trainingCoverage);
         }
 
-        private static Result NfoldTest<Result>(TestManager<Result> testManager,
-                                                List<List<ClassData>> trainingData,
-                                                List<List<ClassData>> testData)
-        {
-            int nfoldCount = trainingData.Count;
-            var result = new Result[nfoldCount];
-            var tasks = new Task[nfoldCount];
-            for (int i = 0; i < nfoldCount; i++)
-            {
-                int taskIndex = i;
-                tasks[i] = new Task(() =>
-                {
-                    result[taskIndex] = testManager.RunPartialTests(trainingData[taskIndex], testData[taskIndex]);
-                    Console.WriteLine(".");
-                });
-                tasks[i].Start();
-            }
-
-            Task.WaitAll(tasks);
-            return testManager.MergeTests(result);
-        }
-
+        
         private static void PrintResult(List<ClassData> classesData, SentimentTable[,] domainResults, double[,] categorizationResults, 
                                         string algorithm, double trainingSetCoverage)
         {

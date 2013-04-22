@@ -6,24 +6,33 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    class NSplitter
+    class CrossValidation
     {
         private int foldCount;
         private double percentTrain;
+        private List<ClassData> classesData;
+        private List<List<ClassData>> trainingData;
+        private List<List<ClassData>> testData;
 
-        public NSplitter(int foldCount, double percentTrain)
+        public CrossValidation(int foldCount, double percentTrain, List<ClassData> classesData)
         {
             if (foldCount < 1)
                 throw new ArgumentException("Must fold more then once!");
             if (percentTrain <= 0 || percentTrain > 1)
                 throw new ArgumentException("Percent train must be below 0 and 1 exclusive");
+            if (classesData == null)
+                throw new NullReferenceException("classesData");
 
             this.foldCount = foldCount;
             this.percentTrain = percentTrain;
+            this.classesData = classesData;
+
+            this.trainingData = new List<List<ClassData>>();
+            this.testData = new List<List<ClassData>>();
+            this.NfoldSplit();
         }
 
-
-        public void NfoldSplit(List<List<ClassData>> testData, List<List<ClassData>> trainingData, List<ClassData> classesData)
+        private void NfoldSplit()
         {
             for (int i = 0; i < foldCount; i++)
             {
@@ -72,6 +81,26 @@ namespace LampMonster
                 else if(trainingDocCount++ < trainingDocMax)
                     trainingDocs.Add(toSplit[i]);
             }
-        }   
+        }
+
+        public Result Compute<Result>(TestManager<Result> testManager)
+        {
+            var result = new Result[foldCount];
+            var tasks = new Task[foldCount];
+            for (int i = 0; i < foldCount; i++)
+            {
+                int taskIndex = i;
+                tasks[i] = new Task(() =>
+                {
+                    result[taskIndex] = testManager.RunPartialTests(trainingData[taskIndex], testData[taskIndex]);
+                    Console.WriteLine(".");
+                });
+                tasks[i].Start();
+            }
+
+            Task.WaitAll(tasks);
+            return testManager.MergeTests(result);
+        }
+
     }
 }

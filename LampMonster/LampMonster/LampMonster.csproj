@@ -55,9 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classifiers\AveragedPerceptron.cs" />
-    <Compile Include="Classifiers\AveragedPerceptronClassifier.cs" />
     <Compile Include="Classifiers\BinaryNaiveBayesFactory.cs" />
+    <Compile Include="Classifiers\PerceptronBase.cs" />
     <Compile Include="Classifiers\PerceptronFactory.cs" />
+    <Compile Include="Classifiers\VeightVector.cs" />
     <Compile Include="TestManagers\CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />

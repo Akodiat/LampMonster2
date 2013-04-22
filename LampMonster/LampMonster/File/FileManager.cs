@@ -9,7 +9,6 @@ namespace LampMonster
 {
     class FileManager
     {
-
         public static List<ClassData> ExctractClassData(string root,
                                                         FileParser parser)
         {

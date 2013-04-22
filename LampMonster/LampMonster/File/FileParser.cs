@@ -26,7 +26,7 @@ namespace LampMonster
         public List<string> GetWordsInFile(string filePath, Predicate<string> wordFilter = null)
         {
             if (wordFilter == null)
-                wordFilter = (s) => true;
+                wordFilter = (s) => false;
 
 
             string[] words;
