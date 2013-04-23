@@ -11,12 +11,14 @@ namespace LampMonster
         public readonly string Word;
         public readonly int Count;
         public readonly double Frequency;
+        public readonly double NormalizedFrequency;
 
-        public DocumentFeature(string word, int count, double frequency)
+        public DocumentFeature(string word, int count, double frequency, double normalizedFrequency)
         {
             this.Word = word;
             this.Count = count;
             this.Frequency = frequency;
+            this.NormalizedFrequency = normalizedFrequency;
         }
     }
 
@@ -24,7 +26,7 @@ namespace LampMonster
     {
         public readonly string ID;
         public readonly int WordCount;
-        private List<DocumentFeature> words;
+        private Dictionary<string, DocumentFeature> words;
 
         public Document(string id,
                         List<string> words)
@@ -43,23 +45,43 @@ namespace LampMonster
             }
 
             this.WordCount = wordCount;
+            double max = bag.Max(x => x.Value / (double)wordCount);
            
-            this.words = new List<DocumentFeature>(bag.Count);
+            this.words = new Dictionary<string, DocumentFeature>(bag.Count);
             foreach (var item in bag)
             {
-                this.words.Add(new DocumentFeature(item.Key, item.Value, (double)item.Value / wordCount));
+				double frequency = (double)item.Value / wordCount;
+				double normalizedFrequency = frequency/max;
+                this.words.Add(item.Key, new DocumentFeature(item.Key, item.Value, frequency, normalizedFrequency));
             }
         }
 
 
         public IEnumerator<DocumentFeature> GetEnumerator()
         {
-            return words.GetEnumerator();
+            return words.Values.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+		/// <summary>
+		/// Inverse document frequency
+		/// </summary>
+		/// <param name="?"></param>
+		public static double IDF(string featureID, List<Document> documents)
+        {
+            int documentCount = 0;
+			foreach (var document in documents)
+			{
+                if (document.words.ContainsKey(featureID))
+                    documentCount++;
+			}
+			double quota = (double)documents.Count/documentCount;
+			
+			return Math.Log(quota);
         }
     }
 }

@@ -1,0 +1,1282 @@
+Statistic Results - 2013-04-23 14:18:52
+
+Algorithm Perceptron: Iterations=5 LearningRate=0,4 Bias=0 FetureCount=50 
+TrainingSetCoverage 1
+
+SENTIMENT ANALISYS
+
+
+Indomain - sentiment analisys
+
+books train books test
+TP: 49,5 FP: 34,4 TN: 65,6 FN: 50,5
+Accuracy 0,5755
+Recall: Pos 0,495, Neg 0,656
+Precision: Pos 0,589988081048868 Neg 0,565030146425495
+McNemar: 0,149211374625835
+
+camera train camera test
+TP: 60,7 FP: 42,6 TN: 56,4 FN: 39,3
+Accuracy 0,588442211055276
+Recall: Pos 0,607, Neg 0,56969696969697
+Precision: Pos 0,587608906098742 Neg 0,589341692789969
+McNemar: 0,00650467691646059
+
+dvd train dvd test
+TP: 53 FP: 50,2 TN: 49,8 FN: 47
+Accuracy 0,514
+Recall: Pos 0,53, Neg 0,498
+Precision: Pos 0,513565891472868 Neg 0,514462809917355
+McNemar: 0,00434008646266001
+
+health train health test
+TP: 40,6 FP: 39,3 TN: 60,7 FN: 59,4
+Accuracy 0,5065
+Recall: Pos 0,406, Neg 0,607
+Precision: Pos 0,508135168961201 Neg 0,50541215653622
+McNemar: 0,173066543295551
+
+music train music test
+TP: 42,4 FP: 36,8 TN: 63,2 FN: 57,6
+Accuracy 0,528
+Recall: Pos 0,424, Neg 0,632
+Precision: Pos 0,535353535353535 Neg 0,52317880794702
+McNemar: 0,204106280193237
+
+software train software test
+TP: 59,3 FP: 44,8 TN: 46,2 FN: 40,7
+Accuracy 0,552356020942408
+Recall: Pos 0,593, Neg 0,507692307692308
+Precision: Pos 0,569644572526417 Neg 0,531645569620253
+McNemar: 0,00921924359424363
+
+
+Out of domain - sentiment analysis
+books train camera test
+TP: 65,3 FP: 50,1 TN: 48,9 FN: 34,7
+Accuracy 0,573869346733668
+Recall: Pos 0,653, Neg 0,493939393939394
+Precision: Pos 0,565857885615251 Neg 0,584928229665072
+McNemar: 0,136418805041215
+
+books train dvd test
+TP: 58,5 FP: 44,5 TN: 55,5 FN: 41,5
+Accuracy 0,57
+Recall: Pos 0,585, Neg 0,555
+Precision: Pos 0,567961165048544 Neg 0,572164948453608
+McNemar: 0,00487342628942742
+
+books train health test
+TP: 60,6 FP: 43,7 TN: 56,3 FN: 39,4
+Accuracy 0,5845
+Recall: Pos 0,606, Neg 0,563
+Precision: Pos 0,581016299137105 Neg 0,588296760710554
+McNemar: 0,010738886501179
+
+books train music test
+TP: 64,6 FP: 46,1 TN: 53,9 FN: 35,4
+Accuracy 0,5925
+Recall: Pos 0,646, Neg 0,539
+Precision: Pos 0,583559168925023 Neg 0,603583426651736
+McNemar: 0,0701557655305955
+
+books train software test
+TP: 60,8 FP: 44,4 TN: 46,6 FN: 39,2
+Accuracy 0,562303664921466
+Recall: Pos 0,608, Neg 0,512087912087912
+Precision: Pos 0,577946768060836 Neg 0,543123543123543
+McNemar: 0,0155359441073727
+
+camera train books test
+TP: 56,1 FP: 48,5 TN: 51,5 FN: 43,9
+Accuracy 0,538
+Recall: Pos 0,561, Neg 0,515
+Precision: Pos 0,536328871892925 Neg 0,539832285115304
+McNemar: 0,00993823826409601
+
+camera train dvd test
+TP: 66,5 FP: 50,5 TN: 49,5 FN: 33,5
+Accuracy 0,58
+Recall: Pos 0,665, Neg 0,495
+Precision: Pos 0,568376068376068 Neg 0,596385542168675
+McNemar: 0,170829023200828
+
+camera train health test
+TP: 53,2 FP: 36,7 TN: 63,3 FN: 46,8
+Accuracy 0,5825
+Recall: Pos 0,532, Neg 0,633
+Precision: Pos 0,591768631813126 Neg 0,574931880108992
+McNemar: 0,0593923938610587
+
+camera train music test
+TP: 67 FP: 56,3 TN: 43,7 FN: 33
+Accuracy 0,5535
+Recall: Pos 0,67, Neg 0,437
+Precision: Pos 0,543390105433901 Neg 0,569752281616688
+McNemar: 0,292206254373217
+
+camera train software test
+TP: 51,2 FP: 31,7 TN: 59,3 FN: 48,8
+Accuracy 0,578534031413613
+Recall: Pos 0,512, Neg 0,651648351648352
+Precision: Pos 0,617611580217129 Neg 0,548566142460685
+McNemar: 0,189022340590578
+
+dvd train books test
+TP: 59 FP: 60,3 TN: 39,7 FN: 41
+Accuracy 0,4935
+Recall: Pos 0,59, Neg 0,397
+Precision: Pos 0,494551550712489 Neg 0,491945477075589
+McNemar: 0,150665372325365
+
+dvd train camera test
+TP: 47,5 FP: 43,6 TN: 55,4 FN: 52,5
+Accuracy 0,517085427135678
+Recall: Pos 0,475, Neg 0,55959595959596
+Precision: Pos 0,521405049396268 Neg 0,513438368860056
+McNemar: 0,0346046308431629
+
+dvd train health test
+TP: 48,1 FP: 35 TN: 65 FN: 51,9
+Accuracy 0,5655
+Recall: Pos 0,481, Neg 0,65
+Precision: Pos 0,578820697954272 Neg 0,556030795551754
+McNemar: 0,157230938618222
+
+dvd train music test
+TP: 54,6 FP: 42,2 TN: 57,8 FN: 45,4
+Accuracy 0,562
+Recall: Pos 0,546, Neg 0,578
+Precision: Pos 0,56404958677686 Neg 0,560077519379845
+McNemar: 0,00534480238845853
+
+dvd train software test
+TP: 45,6 FP: 35 TN: 56 FN: 54,4
+Accuracy 0,531937172774869
+Recall: Pos 0,456, Neg 0,615384615384615
+Precision: Pos 0,56575682382134 Neg 0,507246376811594
+McNemar: 0,197668067226891
+
+health train books test
+TP: 47,3 FP: 48,9 TN: 51,1 FN: 52,7
+Accuracy 0,492
+Recall: Pos 0,473, Neg 0,511
+Precision: Pos 0,491683991683992 Neg 0,492292870905588
+McNemar: 0,00560334959236019
+
+health train camera test
+TP: 51,1 FP: 46,7 TN: 52,3 FN: 48,9
+Accuracy 0,519597989949749
+Recall: Pos 0,511, Neg 0,528282828282828
+Precision: Pos 0,522494887525562 Neg 0,516798418972332
+McNemar: 0,0021194326576547
+
+health train dvd test
+TP: 48 FP: 50 TN: 50 FN: 52
+Accuracy 0,49
+Recall: Pos 0,48, Neg 0,5
+Precision: Pos 0,489795918367347 Neg 0,490196078431373
+McNemar: 0,00153846153846155
+
+health train music test
+TP: 45,9 FP: 48,3 TN: 51,7 FN: 54,1
+Accuracy 0,488
+Recall: Pos 0,459, Neg 0,517
+Precision: Pos 0,487261146496815 Neg 0,488657844990548
+McNemar: 0,0128739432765793
+
+health train software test
+TP: 41,7 FP: 37,2 TN: 53,8 FN: 58,3
+Accuracy 0,5
+Recall: Pos 0,417, Neg 0,591208791208791
+Precision: Pos 0,52851711026616 Neg 0,47992863514719
+McNemar: 0,205283203305114
+
+music train books test
+TP: 52,8 FP: 48 TN: 52 FN: 47,2
+Accuracy 0,524
+Recall: Pos 0,528, Neg 0,52
+Precision: Pos 0,523809523809524 Neg 0,524193548387097
+McNemar: 0,000282485875706218
+
+music train camera test
+TP: 56,1 FP: 53,8 TN: 45,2 FN: 43,9
+Accuracy 0,509045226130653
+Recall: Pos 0,561, Neg 0,456565656565657
+Precision: Pos 0,510464058234759 Neg 0,507295173961841
+McNemar: 0,0414976585853282
+
+music train dvd test
+TP: 46,5 FP: 35,3 TN: 64,7 FN: 53,5
+Accuracy 0,556
+Recall: Pos 0,465, Neg 0,647
+Precision: Pos 0,568459657701711 Neg 0,547377326565144
+McNemar: 0,175393820656059
+
+music train health test
+TP: 56,4 FP: 55,6 TN: 44,4 FN: 43,6
+Accuracy 0,504
+Recall: Pos 0,564, Neg 0,444
+Precision: Pos 0,503571428571429 Neg 0,504545454545455
+McNemar: 0,0594020196686686
+
+music train software test
+TP: 53,8 FP: 50,7 TN: 40,3 FN: 46,2
+Accuracy 0,492670157068063
+Recall: Pos 0,538, Neg 0,442857142857143
+Precision: Pos 0,514832535885167 Neg 0,465895953757225
+McNemar: 0,00864520095289323
+
+software train books test
+TP: 63,7 FP: 63,2 TN: 36,8 FN: 36,3
+Accuracy 0,5025
+Recall: Pos 0,637, Neg 0,368
+Precision: Pos 0,501970055161544 Neg 0,503419972640219
+McNemar: 0,315413920563518
+
+software train camera test
+TP: 61,6 FP: 50,2 TN: 48,8 FN: 38,4
+Accuracy 0,554773869346734
+Recall: Pos 0,616, Neg 0,492929292929293
+Precision: Pos 0,550983899821109 Neg 0,559633027522936
+McNemar: 0,0722319057104914
+
+software train dvd test
+TP: 63,4 FP: 58,9 TN: 41,1 FN: 36,6
+Accuracy 0,5225
+Recall: Pos 0,634, Neg 0,411
+Precision: Pos 0,518397383483238 Neg 0,528957528957529
+McNemar: 0,23068180763914
+
+software train health test
+TP: 60,4 FP: 42,9 TN: 57,1 FN: 39,6
+Accuracy 0,5875
+Recall: Pos 0,604, Neg 0,571
+Precision: Pos 0,584704743465634 Neg 0,590486039296794
+McNemar: 0,0064102564102564
+
+software train music test
+TP: 68,4 FP: 62,8 TN: 37,2 FN: 31,6
+Accuracy 0,528
+Recall: Pos 0,684, Neg 0,372
+Precision: Pos 0,521341463414634 Neg 0,540697674418605
+McNemar: 0,490526485527695
+
+CATEGORIZATION
+
+
+Total Accuracy: 0,0585714285714286
+		books	camera	dvd	health	music	software	
+books		7,4	69,2	20,1	32,3	25,1	45,9	
+camera		46	14,3	36,2	22	41,2	39,3	
+dvd		30,1	44,4	6	38,4	12,9	68,2	
+health		47,2	21,1	45,7	17,6	40,8	27,6	
+music		39,4	49,5	17	40,8	12,6	40,7	
+software		47	26,1	44,5	19,7	41,9	11,8	
+
+books		 Precision 0,0340856748042377 Recall 0,037
+camera		 Precision 0,0636687444345503 Recall 0,0718592964824121
+dvd		 Precision 0,0353982300884956 Recall 0,03
+health		 Precision 0,103044496487119 Recall 0,088
+music		 Precision 0,0722063037249284 Recall 0,063
+software		 Precision 0,0505353319057816 Recall 0,0617801047120419
+../../../../Documents/amazon-balanced-6cats\camera\neg\893.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\64.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\253.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\15.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\189.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\511.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\144.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\372.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\377.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\378.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\501.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\211.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\681.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\678.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\400.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\449.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\239.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\946.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\462.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\692.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\460.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\690.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\795.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\658.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\774.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\765.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\413.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\469.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\914.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\451.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\651.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\175.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\547.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\717.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\402.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\599.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\530.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\528.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\605.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\702.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\691.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\615.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\622.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\952.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\685.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\431.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\665.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\655.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\495.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\640.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\94.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\45.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\920.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\722.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\965.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\953.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\949.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\473.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\469.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\941.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\569.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\936.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\111.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\797.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\814.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\79.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\862.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\371.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\879.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\849.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\213.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\403.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\779.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\844.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\740.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\839.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\277.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\184.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\41.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\838.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\171.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\83.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\165.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\271.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\822.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\888.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\148.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\758.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\144.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\890.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\26.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\903.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\761.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\893.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\767.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\457.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\583.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\867.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\190.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\681.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\401.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\224.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\409.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\80.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\654.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\263.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\458.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\704.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\803.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\682.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\880.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\207.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\675.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\211.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\771.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\849.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\224.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\116.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\114.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\112.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\806.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\103.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\838.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\841.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\176.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\272.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\792.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\162.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\850.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\54.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\388.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\984.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\554.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\498.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\925.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\48.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\33.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\461.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\349.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\978.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\554.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\572.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\490.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\305.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\28.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\549.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\551.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\571.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\301.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\604.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\612.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\348.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\350.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\634.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\356.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\637.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\549.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\556.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\561.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\354.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\35.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\595.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\345.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\584.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\43.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\57.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\947.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\944.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\987.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\341.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\360.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\600.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\999.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\996.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\615.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\502.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\299.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\314.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\974.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\317.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\316.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\315.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\484.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\967.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\471.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\291.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\453.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\355.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\358.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\285.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\617.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\554.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\557.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\574.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\578.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\895.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\339.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\388.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\450.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\629.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\549.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\553.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\565.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\533.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\713.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\398.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\702.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\58.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\692.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\684.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\416.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\677.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\428.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\437.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\607.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\611.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\653.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\62.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\648.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\977.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\723.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\72.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\505.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\950.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\932.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\685.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\377.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\624.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\512.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\445.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\436.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\318.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\608.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\614.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\28.txt	6
+../../../../Documents/amazon-balanced-6cats\software\neg\332.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\926.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\344.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\338.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\544.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\540.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\534.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\528.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\330.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\32.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\515.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\995.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\455.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\616.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\620.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\965.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\964.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\534.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\947.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\570.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\400.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\924.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\34.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\591.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\997.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\440.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\229.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\974.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\903.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\167.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\265.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\803.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\883.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\228.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\864.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\271.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\749.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\867.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\889.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\189.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\247.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\223.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\906.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\15.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\212.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\257.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\769.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\256.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\220.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\219.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\852.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\897.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\819.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\160.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\214.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\229.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\763.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\230.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\116.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\166.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\904.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\760.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\245.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\253.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\231.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\102.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\23.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\882.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\821.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\193.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\131.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\833.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\892.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\223.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\267.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\196.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\848.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\183.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\247.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\141.txt	6
+../../../../Documents/amazon-balanced-6cats\health\neg\858.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\890.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\146.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\897.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\896.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\264.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\104.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\150.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\278.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\175.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\888.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\901.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\892.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\743.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\782.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\783.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\12.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\25.txt	6
+../../../../Documents/amazon-balanced-6cats\music\neg\205.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\192.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\242.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\859.txt	6
+../../../../Documents/amazon-balanced-6cats\books\pos\771.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\452.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\836.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\824.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\133.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\243.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\172.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\883.txt	6
+../../../../Documents/amazon-balanced-6cats\software\pos\455.txt	6
+../../../../Documents/amazon-balanced-6cats\music\pos\831.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\pos\747.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\747.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\74.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\823.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\pos\826.txt	6
+../../../../Documents/amazon-balanced-6cats\dvd\neg\733.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\88.txt	6
+../../../../Documents/amazon-balanced-6cats\camera\neg\777.txt	6
+../../../../Documents/amazon-balanced-6cats\health\pos\83.txt	6
+../../../../Documents/amazon-balanced-6cats\books\neg\304.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\306.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\971.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\712.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\889.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\845.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\967.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\635.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\372.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\638.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\300.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\283.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\813.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\954.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\557.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\388.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\793.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\39.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\946.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\567.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\391.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\279.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\744.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\673.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\98.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\307.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\408.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\588.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\321.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\563.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\327.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\825.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\689.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\827.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\58.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\787.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\576.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\914.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\569.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\827.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\571.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\573.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\579.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\59.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\926.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\993.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\708.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\843.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\569.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\795.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\929.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\313.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\619.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\987.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\612.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\226.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\928.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\988.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\406.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\561.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\607.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\450.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\315.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\95.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\843.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\69.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\395.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\440.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\703.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\925.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\950.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\712.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\731.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\45.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\571.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\848.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\2.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\770.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\570.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\924.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\959.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\556.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\877.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\40.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\815.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\948.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\871.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\590.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\59.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\597.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\598.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\676.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\869.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\900.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\669.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\584.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\600.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\69.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\945.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\602.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\874.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\579.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\867.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\930.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\630.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\919.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\429.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\299.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\424.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\800.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\415.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\414.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\332.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\337.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\789.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\791.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\353.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\595.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\397.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\366.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\572.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\988.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\609.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\286.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\612.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\619.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\887.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\632.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\620.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\779.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\449.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\20.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\456.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\913.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\999.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\442.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\205.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\620.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\972.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\692.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\633.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\443.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\194.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\817.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\343.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\629.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\606.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\939.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\356.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\582.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\948.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\850.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\949.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\346.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\950.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\212.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\556.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\864.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\206.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\288.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\239.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\770.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\606.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\56.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\632.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\547.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\336.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\608.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\750.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\912.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\309.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\580.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\322.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\325.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\569.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\862.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\850.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\565.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\563.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\923.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\331.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\56.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\556.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\857.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\552.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\551.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\605.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\601.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\6.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\837.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\614.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\992.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\879.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\605.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\602.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\193.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\927.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\929.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\930.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\933.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\19.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\94.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\941.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\589.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\8.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\887.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\295.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\890.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\966.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\251.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\610.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\873.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\318.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\599.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\596.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\593.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\289.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\561.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\867.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\307.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\240.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\308.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\630.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\869.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\202.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\629.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\872.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\971.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\622.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\247.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\828.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\980.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\324.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\611.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\614.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\999.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\591.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\728.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\337.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\34.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\343.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\961.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\963.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\568.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\883.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\560.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\358.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\882.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\362.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\370.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\365.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\277.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\971.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\638.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\84.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\592.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\24.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\326.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\607.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\346.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\36.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\429.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\924.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\561.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\829.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\366.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\9.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\638.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\286.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\628.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\626.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\624.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\944.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\399.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\813.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\610.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\394.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\416.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\60.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\572.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\283.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\880.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\638.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\20.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\618.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\911.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\609.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\363.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\279.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\757.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\307.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\964.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\867.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\309.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\866.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\55.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\632.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\98.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\629.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\982.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\357.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\870.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\630.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\233.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\99.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\627.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\625.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\619.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\614.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\98.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\878.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\30.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\608.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\239.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\6.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\596.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\595.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\270.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\582.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\580.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\323.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\569.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\568.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\563.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\558.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\576.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\81.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\664.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\88.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\219.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\881.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\676.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\382.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\880.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\677.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\380.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\788.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\202.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\891.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\812.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\69.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\811.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\903.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\807.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\705.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\714.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\877.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\877.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\670.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\389.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\668.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\818.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\743.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\821.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\414.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\764.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\410.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\785.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\884.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\237.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\818.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\850.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\734.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\74.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\743.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\223.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\76.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\667.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\77.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\874.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\219.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\800.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\897.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\730.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\723.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\204.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\689.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\796.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\815.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\801.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\802.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\372.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\805.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\369.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\809.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\812.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\911.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\812.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\73.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\715.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\74.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\434.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\726.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\425.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\809.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\803.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\680.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\214.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\870.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\261.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\446.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\442.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\743.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\744.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\728.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\428.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\754.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\450.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\416.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\376.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\228.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\871.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\872.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\767.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\868.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\784.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\787.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\808.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\798.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\202.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\854.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\851.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\829.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\273.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\834.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\774.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\245.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\411.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\276.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\24.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\742.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\407.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\779.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\825.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\781.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\842.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\346.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\821.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\819.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\243.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\845.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\75.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\770.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\826.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\825.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\820.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\901.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\826.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\764.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\763.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\434.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\829.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\865.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\751.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\4.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\430.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\249.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\862.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\908.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\424.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\774.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\820.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\821.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\83.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\823.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\43.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\181.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\847.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\21.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\871.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\872.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\735.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\843.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\435.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\271.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\847.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\873.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\88.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\275.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\229.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\731.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\430.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\198.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\264.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\826.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\893.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\26.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\889.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\81.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\797.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\642.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\44.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\441.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\848.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\734.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\85.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\854.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\187.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\858.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\859.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\860.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\874.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\736.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\242.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\873.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\789.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\860.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\865.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\449.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\238.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\901.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\870.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\189.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\788.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\738.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\756.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\93.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\372.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\718.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\207.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\458.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\206.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\544.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\677.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\54.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\687.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\532.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\841.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\702.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\708.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\448.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\728.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\192.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\787.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\765.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\645.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\710.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\374.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\213.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\908.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\91.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\668.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\671.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\919.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\233.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\678.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\920.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\691.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\571.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\832.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\421.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\249.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\382.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\704.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\220.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\22.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\707.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\218.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\942.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\378.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\211.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\660.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\653.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\519.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\884.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\585.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\254.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\905.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\97.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\726.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\658.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\389.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\219.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\381.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\380.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\898.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\72.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\989.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\neg\448.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\648.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\653.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\916.txt	5
+../../../../Documents/amazon-balanced-6cats\music\pos\659.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\589.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\590.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\411.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\413.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\798.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\436.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\516.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\635.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\672.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\674.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\680.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\754.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\235.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\796.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\687.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\689.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\23.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\612.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\828.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\697.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\225.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\704.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\243.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\834.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\620.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\764.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\pos\645.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\395.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\806.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\369.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\702.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\234.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\393.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\450.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\821.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\445.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\230.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\96.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\228.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\438.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\708.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\818.txt	5
+../../../../Documents/amazon-balanced-6cats\software\neg\677.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\891.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\972.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\422.txt	5
+../../../../Documents/amazon-balanced-6cats\health\pos\418.txt	5
+../../../../Documents/amazon-balanced-6cats\dvd\neg\190.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\694.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\374.txt	5
+../../../../Documents/amazon-balanced-6cats\music\neg\272.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\195.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\850.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\876.txt	5
+../../../../Documents/amazon-balanced-6cats\camera\pos\66.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\938.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\396.txt	5
+../../../../Documents/amazon-balanced-6cats\health\neg\395.txt	5
+../../../../Documents/amazon-balanced-6cats\software\pos\783.txt	5
+../../../../Documents/amazon-balanced-6cats\books\neg\252.txt	5
+../../../../Documents/amazon-balanced-6cats\books\pos\975.txt	5

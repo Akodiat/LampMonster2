@@ -48,5 +48,37 @@ namespace LampMonster
             }
             return totalResult;
         }
+
+        public static List<String> ExtractVocabulary(int featuresCount, List<Document> documents)
+        {
+            var bag = new Dictionary<string, double>();
+            foreach (var document in documents)
+            {
+                foreach (var feture in document)
+                {
+                    if (!bag.ContainsKey(feture.Word))
+                        bag.Add(feture.Word, feture.Frequency);
+                    else
+                        bag[feture.Word] += feture.Frequency;
+                }
+            }
+
+            var list = new List<string>(bag.Keys);
+            list.Sort((x, y) =>
+            {
+                double xW = bag[x];
+                double yW = bag[y];
+
+                if (xW < yW) return 1;
+                else if (xW > yW) return -1;
+                else return 0;
+            });
+
+            for (int i = list.Count - 1; i >= featuresCount; i--)
+            {
+                list.RemoveAt(i);
+            }
+            return list;
+        }
     }
 }

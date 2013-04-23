@@ -39,7 +39,7 @@ namespace LampMonster
             var perceptrons = new List<IPerceptron>();
             foreach (var category in categories)
             {
-                var list = ExctractVocabulary(category, categories);
+                var list = Utils.ExtractVocabulary(this.fetureCount, category.TrainingDocuments);
 
                 var docsNotOfCategory = new List<Document>();
                 foreach (var cat in categories)
@@ -80,64 +80,6 @@ namespace LampMonster
                                            learningRate,
                                            iterations,
                                            list);
-        }
-
-        private List<string> ExctractVocabulary(CategoryData category, List<CategoryData> categories)
-        {
-            var bag = new Dictionary<string, double>();
-            foreach (var document in category.TrainingDocuments)
-            {
-                foreach (var feture in document)
-                {
-                    if (!bag.ContainsKey(feture.Word))
-                        bag.Add(feture.Word, feture.Frequency);
-                    else
-                        bag[feture.Word] += feture.Frequency;
-                }
-            }
-
-
-            var bag2 = new Dictionary<string, double>();
-            foreach (var cat in categories)
-            {
-                if (cat == category) continue;
-
-                foreach (var document in cat.TrainingDocuments)
-                {
-                    foreach (var feture in document)
-                    {
-                        if (!bag.ContainsKey(feture.Word))
-                            bag.Add(feture.Word, feture.Frequency);
-                        else
-                            bag[feture.Word] += feture.Frequency;
-                    }
-                }
-            }
-
-            foreach (var feture in bag2)
-            {
-                if (bag.ContainsKey(feture.Key))
-                    bag[feture.Key] -= feture.Value;
-            }
-
-
-
-            var list = new List<string>(bag.Keys);
-            list.Sort((x, y) =>
-            {
-                double xW = bag[x];
-                double yW = bag[y];
-
-                if (xW < yW) return 1;
-                else if (xW > yW) return -1;
-                else return 0;
-            });
-
-            for (int i = list.Count - 1; i >= fetureCount; i--)
-            {
-                list.RemoveAt(i);
-            }
-            return list;
         }
 
         public string ClassifyerDesc()

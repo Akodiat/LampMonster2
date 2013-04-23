@@ -1,0 +1,241 @@
+Statistic Results - 2013-04-20 17:22:38
+
+Algorithm Binary Naive Bayes Prior 1 
+TrainingSetCoverage 1
+
+SENTIMENT ANALISYS
+
+books train books test
+TP: 173 FP: 66,2 TN: 133,8 FN: 27
+Accuracy 0,767
+Recall: Pos 0,865, Neg 0,669
+Precision: Pos 0,723244147157191 Neg 0,832089552238806
+
+books train camera test
+TP: 154,4 FP: 85,6 TN: 113,4 FN: 45,6
+Accuracy 0,671177944862155
+Recall: Pos 0,772, Neg 0,569849246231156
+Precision: Pos 0,643333333333333 Neg 0,713207547169811
+
+books train dvd test
+TP: 157,4 FP: 53,6 TN: 146,4 FN: 42,6
+Accuracy 0,7595
+Recall: Pos 0,787, Neg 0,732
+Precision: Pos 0,745971563981043 Neg 0,774603174603175
+
+books train health test
+TP: 122,8 FP: 53,4 TN: 146,6 FN: 77,2
+Accuracy 0,6735
+Recall: Pos 0,614, Neg 0,733
+Precision: Pos 0,696935300794552 Neg 0,655049151027703
+
+books train music test
+TP: 150,8 FP: 46,2 TN: 153,8 FN: 49,2
+Accuracy 0,7615
+Recall: Pos 0,754, Neg 0,769
+Precision: Pos 0,765482233502538 Neg 0,757635467980296
+
+books train software test
+TP: 148,8 FP: 57,2 TN: 125,8 FN: 51,2
+Accuracy 0,716971279373368
+Recall: Pos 0,744, Neg 0,687431693989071
+Precision: Pos 0,722330097087379 Neg 0,710734463276836
+
+camera train books test
+TP: 117,2 FP: 44,4 TN: 155,6 FN: 82,8
+Accuracy 0,682
+Recall: Pos 0,586, Neg 0,778
+Precision: Pos 0,725247524752475 Neg 0,652684563758389
+
+camera train camera test
+TP: 165 FP: 27,6 TN: 171,4 FN: 35
+Accuracy 0,843107769423559
+Recall: Pos 0,825, Neg 0,861306532663317
+Precision: Pos 0,856697819314642 Neg 0,830426356589147
+
+camera train dvd test
+TP: 116 FP: 40,8 TN: 159,2 FN: 84
+Accuracy 0,688
+Recall: Pos 0,58, Neg 0,796
+Precision: Pos 0,739795918367347 Neg 0,654605263157895
+
+camera train health test
+TP: 109,8 FP: 29,8 TN: 170,2 FN: 90,2
+Accuracy 0,7
+Recall: Pos 0,549, Neg 0,851
+Precision: Pos 0,786532951289398 Neg 0,653609831029186
+
+camera train music test
+TP: 93,6 FP: 28,4 TN: 171,6 FN: 106,4
+Accuracy 0,663
+Recall: Pos 0,468, Neg 0,858
+Precision: Pos 0,767213114754098 Neg 0,61726618705036
+
+camera train software test
+TP: 122,6 FP: 23,4 TN: 159,6 FN: 77,4
+Accuracy 0,736814621409922
+Recall: Pos 0,613, Neg 0,872131147540984
+Precision: Pos 0,83972602739726 Neg 0,673417721518987
+
+dvd train books test
+TP: 112,8 FP: 25,6 TN: 174,4 FN: 87,2
+Accuracy 0,718
+Recall: Pos 0,564, Neg 0,872
+Precision: Pos 0,815028901734104 Neg 0,666666666666667
+
+dvd train camera test
+TP: 61,8 FP: 10,4 TN: 188,6 FN: 138,2
+Accuracy 0,627568922305764
+Recall: Pos 0,309, Neg 0,947738693467337
+Precision: Pos 0,85595567867036 Neg 0,577111383108935
+
+dvd train dvd test
+TP: 121 FP: 19,8 TN: 180,2 FN: 79
+Accuracy 0,753
+Recall: Pos 0,605, Neg 0,901
+Precision: Pos 0,859375 Neg 0,695216049382716
+
+dvd train health test
+TP: 55,4 FP: 11 TN: 189 FN: 144,6
+Accuracy 0,611
+Recall: Pos 0,277, Neg 0,945
+Precision: Pos 0,83433734939759 Neg 0,566546762589928
+
+dvd train music test
+TP: 166,4 FP: 63,6 TN: 136,4 FN: 33,6
+Accuracy 0,757
+Recall: Pos 0,832, Neg 0,682
+Precision: Pos 0,723478260869565 Neg 0,802352941176471
+
+dvd train software test
+TP: 73,8 FP: 9,6 TN: 173,4 FN: 126,2
+Accuracy 0,645430809399478
+Recall: Pos 0,369, Neg 0,947540983606557
+Precision: Pos 0,884892086330935 Neg 0,578771695594125
+
+health train books test
+TP: 146,8 FP: 65,2 TN: 134,8 FN: 53,2
+Accuracy 0,704
+Recall: Pos 0,734, Neg 0,674
+Precision: Pos 0,692452830188679 Neg 0,717021276595745
+
+health train camera test
+TP: 114,4 FP: 18,6 TN: 180,4 FN: 85,6
+Accuracy 0,738847117794486
+Recall: Pos 0,572, Neg 0,906532663316583
+Precision: Pos 0,86015037593985 Neg 0,678195488721805
+
+health train dvd test
+TP: 135,6 FP: 47,6 TN: 152,4 FN: 64,4
+Accuracy 0,72
+Recall: Pos 0,678, Neg 0,762
+Precision: Pos 0,740174672489083 Neg 0,702952029520295
+
+health train health test
+TP: 158,2 FP: 29,2 TN: 170,8 FN: 41,8
+Accuracy 0,8225
+Recall: Pos 0,791, Neg 0,854
+Precision: Pos 0,84418356456777 Neg 0,803386641580433
+
+health train music test
+TP: 122,8 FP: 48 TN: 152 FN: 77,2
+Accuracy 0,687
+Recall: Pos 0,614, Neg 0,76
+Precision: Pos 0,718969555035129 Neg 0,663176265270506
+
+health train software test
+TP: 129 FP: 20,2 TN: 162,8 FN: 71
+Accuracy 0,761879895561358
+Recall: Pos 0,645, Neg 0,889617486338798
+Precision: Pos 0,864611260053619 Neg 0,696321642429427
+
+music train books test
+TP: 114,8 FP: 21 TN: 179 FN: 85,2
+Accuracy 0,7345
+Recall: Pos 0,574, Neg 0,895
+Precision: Pos 0,845360824742268 Neg 0,677517032551098
+
+music train camera test
+TP: 75 FP: 20 TN: 179 FN: 125
+Accuracy 0,636591478696742
+Recall: Pos 0,375, Neg 0,899497487437186
+Precision: Pos 0,789473684210526 Neg 0,588815789473684
+
+music train dvd test
+TP: 99,6 FP: 10 TN: 190 FN: 100,4
+Accuracy 0,724
+Recall: Pos 0,498, Neg 0,95
+Precision: Pos 0,908759124087591 Neg 0,654269972451791
+
+music train health test
+TP: 60,6 FP: 16,4 TN: 183,6 FN: 139,4
+Accuracy 0,6105
+Recall: Pos 0,303, Neg 0,918
+Precision: Pos 0,787012987012987 Neg 0,568421052631579
+
+music train music test
+TP: 129,8 FP: 22 TN: 178 FN: 70,2
+Accuracy 0,7695
+Recall: Pos 0,649, Neg 0,89
+Precision: Pos 0,855072463768116 Neg 0,717163577759871
+
+music train software test
+TP: 53 FP: 6,4 TN: 176,6 FN: 147
+Accuracy 0,599477806788512
+Recall: Pos 0,265, Neg 0,965027322404372
+Precision: Pos 0,892255892255892 Neg 0,545735475896168
+
+software train books test
+TP: 195,2 FP: 167,4 TN: 32,6 FN: 4,8
+Accuracy 0,5695
+Recall: Pos 0,976, Neg 0,163
+Precision: Pos 0,538334252619967 Neg 0,871657754010695
+
+software train camera test
+TP: 191,6 FP: 97,6 TN: 101,4 FN: 8,4
+Accuracy 0,734335839598998
+Recall: Pos 0,958, Neg 0,509547738693467
+Precision: Pos 0,662517289073306 Neg 0,923497267759563
+
+software train dvd test
+TP: 192 FP: 153,2 TN: 46,8 FN: 8
+Accuracy 0,597
+Recall: Pos 0,96, Neg 0,234
+Precision: Pos 0,556199304750869 Neg 0,854014598540146
+
+software train health test
+TP: 178,2 FP: 92,2 TN: 107,8 FN: 21,8
+Accuracy 0,715
+Recall: Pos 0,891, Neg 0,539
+Precision: Pos 0,659023668639053 Neg 0,83179012345679
+
+software train music test
+TP: 186,6 FP: 136,2 TN: 63,8 FN: 13,4
+Accuracy 0,626
+Recall: Pos 0,933, Neg 0,319
+Precision: Pos 0,578066914498141 Neg 0,826424870466321
+
+software train software test
+TP: 167,6 FP: 31,2 TN: 151,8 FN: 32,4
+Accuracy 0,833942558746736
+Recall: Pos 0,838, Neg 0,829508196721311
+Precision: Pos 0,843058350100604 Neg 0,824104234527687
+
+CATEGORIZATION
+
+		books	camera	dvd	health	music	software	
+books		303	5	9,8	43,6	7	31,6	
+camera		0	365,8	0	27,2	0	6	
+dvd		14,6	18,4	277	39,6	39,6	10,8	
+health		0,6	8,4	0	386,8	0,6	3,6	
+music		1	2,8	3,2	14,6	372	6,4	
+software		2	12	0,6	19,6	1	347,8	
+
+McNEMAR
+		books	camera	dvd	health	music	software	
+books		16,488	12,195	1,258	4,337	0,094	0,332	
+camera		11,592	0,875	14,954	30,401	45,134	28,929	
+dvd		33,64	109,911	35,472	114,711	9,259	100,115	
+health		1,216	43,081	2,52	2,236	6,81	28,296	
+music		38,81	76,034	74,023	97,105	25,198	128,868	
+software		153,535	75,063	130,788	43,475	100,801	0,023	

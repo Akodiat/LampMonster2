@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    class VeightVector
+    class VeightVector:IEnumerable<string>
     {
         private Dictionary<string, double> representation;
 
@@ -53,5 +53,15 @@ namespace LampMonster
         }
 
 
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return representation.Keys.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }

@@ -36,6 +36,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accord.MachineLearning, Version=2.9.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Accord\Accord.MachineLearning.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math, Version=2.9.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Accord\Accord.Math.dll</HintPath>
+    </Reference>
     <Reference Include="Quadruple">
       <HintPath>.\Quadruple.dll</HintPath>
     </Reference>
@@ -57,6 +65,8 @@
     <Compile Include="Classifiers\AveragedPerceptron.cs" />
     <Compile Include="Classifiers\BinaryNaiveBayesFactory.cs" />
     <Compile Include="Classifiers\IPerceptronBase.cs" />
+    <Compile Include="Classifiers\KNNClassifier.cs" />
+    <Compile Include="Classifiers\KNNFactory.cs" />
     <Compile Include="Classifiers\PerceptronBase.cs" />
     <Compile Include="Classifiers\PerceptronFactory.cs" />
     <Compile Include="Classifiers\VeightVector.cs" />
