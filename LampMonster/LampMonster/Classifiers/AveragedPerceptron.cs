@@ -13,7 +13,7 @@ namespace LampMonster
             : base (category, docsOfCategory, docsNotOfCat, learningRate, iterations, bias, vocabulary)
         { }
 
-        protected override void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate)
+        protected override void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate, Dictionary<string, double> IDFMap)
         {
             var w = new VeightVector(this.weightVector);
 
@@ -23,27 +23,29 @@ namespace LampMonster
                 //Learn from training data
                 foreach (var doc in docsOfCategory)
                 {
-                    this.Learn(true, doc, w, i, iterations, trainingSize, learningRate);
+                    this.Learn(true, doc, w, i, iterations, trainingSize, learningRate, IDFMap);
                 }
                 foreach (var doc in docsNotOfCat)
                 {
-                    this.Learn(false, doc, w, i, iterations, trainingSize, learningRate);
+                    this.Learn(false, doc, w, i, iterations, trainingSize, learningRate, IDFMap);
                 }
             }
         }
 
-        private void Learn(bool p, Document doc, VeightVector w,  int counter, int iterations, int trainingSize, double learningRate)
+        private void Learn(bool p, Document doc, VeightVector w, int counter, int iterations, int trainingSize, double learningRate, Dictionary<string, double> IDFMap)
         {
 			bool guess = Classify(doc, w)>=0;
 			double learningFactor = p ? learningRate : -learningRate;
             if (p != guess) // if p and Classify don't agree on the category
             {
                 double average_weight = (double)(trainingSize * iterations - counter) / (trainingSize * iterations);
-                foreach (var feture in doc)
+                foreach (var feature in doc)
                 {
-                    double learned = learningFactor * feture.Frequency;
-                    w[feture.Word] += learned;
-                    weightVector[feture.Word] += average_weight * learned;
+                    double idf;
+                    IDFMap.TryGetValue(feature.Word, out idf);
+                    double learned = learningFactor * feature.NormalizedFrequency * idf;
+                    w[feature.Word] += learned;
+                    weightVector[feature.Word] += average_weight * learned;
                 }
             }
         }

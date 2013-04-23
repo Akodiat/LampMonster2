@@ -9,6 +9,13 @@ namespace LampMonster
 {
     static class Program
     {
+        private static readonly IClassificationFactory[] factories = {
+                                                 //new KNNFactory(2000,20),
+                                                 //new PerceptronFactory(8000, 100, 0.05, -1, PerceptronType.Normal),
+                                                 //new PerceptronFactory(8000, 100, 0.05, -1, PerceptronType.Awereged),
+                                                 new BinaryNaiveBayesFactory(1),
+                                                 new NaiveBayesFactory(1)
+                                             };
         static void Main()
         {
             var parser = new FileParser("stopwords.txt", '.', ' ', ',', '\n', '\r', '"', '(', ')','[', ']', '$', '!');
@@ -17,166 +24,39 @@ namespace LampMonster
             var trainingCoverage = 1;
             var failLog = new FailLog();
             var validator = new CrossValidation(10, trainingCoverage, classesData);
-
-            var factory = new PerceptronFactory(10000, 100, 0.5, 0, PerceptronType.Normal);
-            //var factory = new BinaryNaiveBayesFactory(1);
-            var sentimentManager = new SentimentClassificationManager(factory, failLog);
-            var categorizeManager = new CategorizeClassificationManager(factory);
-
-            var domainResults = validator.Compute(sentimentManager);
-            var categorizationResults = validator.Compute(categorizeManager);
-
-            var recall = CalculateRecall(categorizationResults);
-            var precision = CalculatePrecision(categorizationResults);
-            var accuracy = CalculateAccuracy(categorizationResults);
-
-            PrintResult(classesData, domainResults, categorizationResults, factory.ClassifyerDesc(), trainingCoverage, failLog);
-
-        }
-
-        
-        private static void PrintResult(List<ClassData> classesData, SentimentTable[,] domainResults, double[,] categorizationResults, 
-                                        string algorithm, double trainingSetCoverage, FailLog failLog)
-        {
-            using (StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/" +
-                  DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + ".txt"))
+            var statistics = new StatisticsManager(GetCategoryNames(classesData));
+            foreach (var factory in factories)
             {
-                file.WriteLine("Statistic Results - " + DateTime.Now + "\n");
-                file.WriteLine("Algorithm {0} \r\nTrainingSetCoverage {1}", algorithm, trainingSetCoverage);
-                file.WriteLine();
+                var sentimentTests = new SentimentClassificationManager(factory, failLog);
+                var catTests = new CategorizeClassificationManager(factory);
 
-                PrintSentimentResults(classesData, domainResults, file);
-                PrintCategorizationResults(classesData, categorizationResults, file);
-                failLog.PrintWorst(1000, file);
+                var sentimentResults = validator.Compute(sentimentTests);
+                var categorizationResults = validator.Compute(catTests);
+
+                statistics.AddAlgoStats(factory.ClassifyerDesc(), catTests.MergeTests(categorizationResults), 
+                                sentimentTests.MergeTests(sentimentResults), categorizationResults, sentimentResults);
+            }
+            using (var fileStream = OpenFileStream())
+            {
+                statistics.PrintResults(fileStream);
             }
         }
 
-        private static void PrintCategorizationResults(List<ClassData> classesData, double[,] categorizationResults, StreamWriter file)
+        private static List<string> GetCategoryNames(List<ClassData> classesData)
         {
-            file.WriteLine("CATEGORIZATION\r\n");
-            file.WriteLine("\r\nTotal Accuracy: " + CalculateAccuracy(categorizationResults));
-            
-            file.Write("\t\t");
-
-
-            for (int i = 0; i < classesData.Count; i++)
+            var catNames = new List<string>();
+            foreach (var name in classesData)
             {
-                file.Write(classesData[i].ClassID + "\t");
+                catNames.Add(name.ClassID);
             }
-
-            file.WriteLine();
-
-            for (int i = 0; i < categorizationResults.GetLength(0); i++)
-            {
-                file.Write(classesData[i].ClassID + "\t\t");
-                for (int j = 0; j < categorizationResults.GetLength(1); j++)
-                {
-                    file.Write(categorizationResults[i, j] + "\t");
-                }
-                file.WriteLine();
-            }
-            file.WriteLine();
-
-            var recall = CalculateRecall(categorizationResults);
-            var precision = CalculatePrecision(categorizationResults);
-
-            for (int i = 0; i < classesData.Count; i++)
-            {
-                file.Write(classesData[i].ClassID + "\t\t");
-                file.Write(" Precision " + precision[i]);
-                file.WriteLine(" Recall " + recall[i]);
-            }
+            return catNames;
         }
 
-        private static void PrintSentimentResults(List<ClassData> classesData, SentimentTable[,] domainResults, StreamWriter file)
+        private static StreamWriter OpenFileStream()
         {
-
-            file.WriteLine("SENTIMENT ANALISYS\r\n\r\n");
-
-
-            file.WriteLine("Indomain - sentiment analisys\r\n");
-            for (int i = 0; i < domainResults.GetLength(0); i++)
-            {
-                string classID = classesData[i].ClassID;
-                PrintSentiment(classID, classID, domainResults[i, i], file);
-            }
-
-            file.WriteLine("\r\nOut of domain - sentiment analysis");
-            for (int i = 0; i < domainResults.GetLength(0); i++)
-            {
-                for (int j = 0; j < domainResults.GetLength(1); j++)
-                {
-                    if (i == j) continue;
-
-                    string trainID = classesData[i].ClassID;
-                    string testID = classesData[j].ClassID;
-                    PrintSentiment(trainID, testID, domainResults[i, j], file);
-                }
-            }
-        }
-
-        private static void PrintSentiment(string trainId, string testID, SentimentTable sentiment, StreamWriter file)
-        {
-            file.WriteLine(trainId + " train " + testID + " test");
-            file.WriteLine(sentiment);
-            file.WriteLine("Accuracy " + sentiment.GetAccuracy());
-            file.WriteLine("Recall: Pos " + sentiment.GetRecall()[0] +
-                           ", Neg " + sentiment.GetRecall()[1]);
-            file.WriteLine("Precision: Pos " + sentiment.GetPercision()[0] +
-                           " Neg " + sentiment.GetPercision()[1]);
-            file.WriteLine("McNemar: " + sentiment.GetMcNemar());
-
-            file.WriteLine();
-        }
-
-        private static double CalculateAccuracy(double[,] confusionMatrix)
-        {
-            double diagonal = 0;
-            double total = 0;
-            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
-            {
-                diagonal += confusionMatrix[i, i];
-                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
-                {
-                    total += confusionMatrix[i, j];
-                }
-            }
-            return diagonal / total;
-        }
-
-        private static double[] CalculatePrecision(double[,] confusionMatrix)
-        {
-            var precision = new double[confusionMatrix.GetLength(0)];
-            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
-            {
-                double cii = confusionMatrix[i, i];
-                double columnValue = 0;
-                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
-                {
-                    columnValue += confusionMatrix[j, i];
-                }
-                precision[i] = cii / columnValue;
-            }
-
-            return precision;
-
-        }
-
-        private static double[] CalculateRecall(double[,] confusionMatrix)
-        {
-            var recall = new double[confusionMatrix.GetLength(0)];
-            for (int i = 0; i < confusionMatrix.GetLength(0); i++)
-            {
-                double cii = confusionMatrix[i, i];
-                double rowValue = 0;
-                for (int j = 0; j < confusionMatrix.GetLength(1); j++)
-                {
-                    rowValue += confusionMatrix[i, j];
-                }
-                recall[i] = cii / rowValue;
-            }
-
-            return recall;
+            StreamWriter file = new System.IO.StreamWriter("../../../../Documents/Resultstats/" +
+                  DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + ".txt");
+            return file;
         }
     }
 }

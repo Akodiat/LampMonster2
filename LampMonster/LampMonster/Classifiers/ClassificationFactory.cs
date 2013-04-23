@@ -11,5 +11,4 @@ namespace LampMonster
         Classifyer GetClassifyer(List<CategoryData> categories);
         string ClassifyerDesc();
     }
-
 }

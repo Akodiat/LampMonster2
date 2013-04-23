@@ -80,5 +80,17 @@ namespace LampMonster
             }
             return list;
         }
+
+        public static double[] GenerateInputVector(int vocabularySize, Document document,
+                                Dictionary<string, int> indexMap)
+        {
+            double[] inputVector = new double[vocabularySize];
+            foreach (var feature in document)
+            {
+				if(indexMap.ContainsKey(feature.Word))
+					inputVector[indexMap[feature.Word]] = feature.NormalizedFrequency;
+            }
+            return inputVector;
+        }
     }
 }

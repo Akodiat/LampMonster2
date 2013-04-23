@@ -7,40 +7,74 @@ using Accord.MachineLearning;
 using Accord.Math;
 
 
-namespace LampMonster.Classifiers
+namespace LampMonster
 {
     class KNNFactory:IClassificationFactory
     {
+        private readonly int nearestNeighborsCount;
 		private readonly int featureCount;
-		public KNNFactory(int featureCount)
+        public KNNFactory(int featureCount, int nearestNeighborsCount)
         {
             this.featureCount = featureCount;
+            this.nearestNeighborsCount = nearestNeighborsCount;
         }
 
         public Classifyer GetClassifyer(List<CategoryData> categories)
         {
-			List<Document> trainingDox = new List<Document>();
+			var trainingDox = new List<Document>();
 			foreach (var category in categories)
 			{
 				trainingDox.AddRange(category.TrainingDocuments);
 			}
             List<string> vocabulary = Utils.ExtractVocabulary(featureCount, trainingDox);
 
-            Dictionary<string, int> indexMap = new Dictionary<string, int>();
+            var indexMap = new Dictionary<string, int>();
             for (int i = 0; i < vocabulary.Count; i++)
             {
                 indexMap.Add(vocabulary[i], i);
             }
 
-            throw new NotImplementedException();
+            double[][] inputVectors = GenerateInputVectors(vocabulary, indexMap, trainingDox);
+            int[] output = GenerateOutput(categories, trainingDox.Count);
 
+
+            return new KNNClassifier(categories, inputVectors, output, this.nearestNeighborsCount, indexMap);
         }
+
+        private double[][] GenerateInputVectors(List<string> vocabulary, Dictionary<string, int> indexMap, List<Document> trainingDox)
+        {
+			double[][] input = new double[trainingDox.Count][];
+            for (int i = 0; i < input.Length; i++)
+            {
+                input[i] = Utils.GenerateInputVector(vocabulary.Count, trainingDox[i], indexMap);
+            }
+            return input;
+        }
+
+
+
+        private int[] GenerateOutput(List<CategoryData> categories, int documentsCount)
+        {
+            List<int> output = new List<int>();
+            int classCounter = 0;
+            foreach (var category in categories)
+            {
+                foreach (var doc in category.TrainingDocuments)
+                {
+                    output.Add(classCounter);
+                }
+                classCounter++;
+            }
+            return output.ToArray();
+        }
+
 
 		//private double[] ConvertToFeatureVector(
 
         public string ClassifyerDesc()
         {
-            throw new NotImplementedException();
+            return string.Format("KNearestNeighbors: k = {0}, featurecount = {1}",
+                                 this.nearestNeighborsCount, this.featureCount);
         }
     }
 }

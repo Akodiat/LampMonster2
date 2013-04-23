@@ -72,6 +72,7 @@
     <Compile Include="Classifiers\VeightVector.cs" />
     <Compile Include="Classifiers\VotedPerceptron.cs" />
     <Compile Include="FailLog.cs" />
+    <Compile Include="StatisticsManager.cs" />
     <Compile Include="TestManagers\CategorizeClassificationManager.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="ClassData.cs" />

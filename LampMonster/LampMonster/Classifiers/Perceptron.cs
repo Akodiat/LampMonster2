@@ -14,30 +14,19 @@ namespace LampMonster
         : base(category, docsOfCategory, docsNotOfCat, learningRate, iterations, bias, vocabulary)
         { }
 
-        protected override void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate)
+        protected override void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate, Dictionary<string, double> IDFMap)
         {
-            List<Document> allDocuments = new List<Document>(docsOfCategory);
-            allDocuments.AddRange(docsNotOfCat);
-            var featureMap = new Dictionary<string, double>();
-            foreach (var item in this.weightVector)
-            {
-                featureMap.Add(item, Document.IDF(item, allDocuments));
-            }
-
-
-
-
             int trainingCount = docsOfCategory.Count + docsNotOfCat.Count;
             for (int i = 0; i < iterations; i++)
             {
                 //Learn from training data
                 foreach (var doc in docsOfCategory)
                 {
-                    this.LearnDocument(true, doc, learningRate, trainingCount, featureMap);
+                    this.LearnDocument(true, doc, learningRate, trainingCount, IDFMap);
                 }
                 foreach (var doc in docsNotOfCat)
                 {
-                    this.LearnDocument(false, doc, learningRate, trainingCount, featureMap);
+                    this.LearnDocument(false, doc, learningRate, trainingCount, IDFMap);
                 }
             }
         }

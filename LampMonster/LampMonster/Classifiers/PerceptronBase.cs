@@ -20,13 +20,24 @@ namespace LampMonster
            
             this.Category = category;
             this.Bias = bias;
-			
+
             //Initialize the weightvector
             weightVector = new VeightVector(vocabulary);
-            Learn(docsOfCategory, docsNotOfCat, iterations, learningRate);
+            
+            //Create map for tf-idf
+            List<Document> allDocuments = new List<Document>(docsOfCategory);
+            allDocuments.AddRange(docsNotOfCat);
+            var IDFMap = new Dictionary<string, double>();
+            foreach (var item in this.weightVector)
+            {
+                IDFMap.Add(item, Document.IDF(item, allDocuments));
+            }
+			
+            Learn(docsOfCategory, docsNotOfCat, iterations, learningRate, IDFMap);
         }
 
-        protected abstract void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate);
+
+        protected abstract void Learn(List<Document> docsOfCategory, List<Document> docsNotOfCat, int iterations, double learningRate, Dictionary<string, double> IDFMap);
 
 
         public double Classify(Document document)

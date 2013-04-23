@@ -83,7 +83,7 @@ namespace LampMonster
             }
         }
 
-        public Result Compute<Result>(TestManager<Result> testManager)
+        public Result[] Compute<Result>(TestManager<Result> testManager)
         {
             var result = new Result[foldCount];
             var tasks = new Task[foldCount];
@@ -99,7 +99,7 @@ namespace LampMonster
             }
 
             Task.WaitAll(tasks);
-            return testManager.MergeTests(result);
+            return result;
         }
 
     }
