@@ -9,7 +9,8 @@ namespace LampMonster
     enum PerceptronType
     {
         Normal,
-        Awereged
+        Awereged,
+        Voted
     }
 
 
@@ -35,7 +36,7 @@ namespace LampMonster
 
         public virtual Classifyer GetClassifyer(List<CategoryData> categories)
         {
-            var perceptrons = new List<PerceptronBase>();
+            var perceptrons = new List<IPerceptron>();
             foreach (var category in categories)
             {
                 var list = ExctractVocabulary(category, categories);
@@ -54,7 +55,7 @@ namespace LampMonster
             return new PerceptronClassifier(perceptrons);
         }
 
-        private PerceptronBase CreatePerceptron(CategoryData category, List<string> list, List<Document> docsNotOfCategory)
+        private IPerceptron CreatePerceptron(CategoryData category, List<string> list, List<Document> docsNotOfCategory)
         {
             if (type == PerceptronType.Awereged)
                 return new AveragedPerceptron(category.ID,
@@ -64,7 +65,7 @@ namespace LampMonster
                                     iterations,
                                     bias,
                                     list);
-            else
+            else if (type == PerceptronType.Normal)
                 return new Perceptron(category.ID,
                                     category.TrainingDocuments,
                                     docsNotOfCategory,
@@ -72,6 +73,13 @@ namespace LampMonster
                                     iterations,
                                     bias,
                                     list);
+            else
+                return new VotedPerceptron(category.ID,
+                                           category.TrainingDocuments,
+                                           docsNotOfCategory,
+                                           learningRate,
+                                           iterations,
+                                           list);
         }
 
         private List<string> ExctractVocabulary(CategoryData category, List<CategoryData> categories)

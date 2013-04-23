@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LampMonster
 {
-    abstract class PerceptronBase 
+    abstract class PerceptronBase : IPerceptron
     {
-        public readonly string Category;
+        public string Category { get; private set; }
         public readonly double Bias;
         protected VeightVector weightVector;
 

@@ -18,8 +18,8 @@ namespace LampMonster
             var failLog = new FailLog();
             var validator = new CrossValidation(10, trainingCoverage, classesData);
 
-            var factory = new PerceptronFactory(4000, 100, 0.1, 0, PerceptronType.Normal);
-
+            var factory = new PerceptronFactory(50, 5, 0.4, 0, PerceptronType.Voted);
+            //var factory = new BinaryNaiveBayesFactory(1);
             var sentimentManager = new SentimentClassificationManager(factory, failLog);
             var categorizeManager = new CategorizeClassificationManager(factory);
 

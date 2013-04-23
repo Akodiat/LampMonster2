@@ -9,9 +9,9 @@ namespace LampMonster
 	
     class PerceptronClassifier : Classifyer
     {
-        List<PerceptronBase> perceptrons;
+        List<IPerceptron> perceptrons;
 
-        public PerceptronClassifier(List<PerceptronBase> perceptrons)
+        public PerceptronClassifier(List<IPerceptron> perceptrons)
         {
             this.perceptrons = perceptrons;
         }

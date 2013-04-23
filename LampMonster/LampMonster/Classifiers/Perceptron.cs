@@ -38,7 +38,8 @@ namespace LampMonster
 				double learningFactor = p?learningRate:-learningRate;
                 foreach (var feature in document)
                 {
-                    weightVector[feature.Word] += learningFactor * Math.Log(trainingCount / feature.Frequency);
+                    double l = learningFactor * Math.Log(trainingCount / feature.Frequency);
+                    weightVector[feature.Word] += l * l; 
                 }
             }
         }
